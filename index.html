@@ -4,25 +4,53 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-<p>What is the mathematical relationship between the two variables?</p>
+  <p>
+    <h1>Determine the Mathematical Relationship Between the Independent and Dependent Variables</h1>
+  </p>
+  <div id="navbar">
+    <div id="innernavbar">
+        <input type="button" id="newDataSet" value="New Data Set" onclick="reset()">
+        <p>Select the horizontal axis:</p>
+        <ul>
+          <input type="radio" name="xAx" value=1 id="rawDat" checked="checked"> [Independent Variable]<br>
+          <input type="radio" name="xAx" value=2 id="sqDat"> [Independent Variable]<sup>2</sup><br>
+          <input type="radio" name="xAx" value=-1 id="invDat"> [Independent Variable]<sup>-1</sup><br>
+          <input type="radio" name="xAx" value=-2 id="invSqDat"> [Independent Variable]<sup>-2</sup><br>
+        </ul>
+        <p>Adjust the slope of the trendline:</p>
+         <input type="range" min=".05" max="5" value="0" step=".05" class="slider" id="myRange" oninput="sliderFunction()">
+        <p style="line-height:50%;">Trendline Equation:</p>
+        <ul style="list-style-type:none; background-color: yellow;" id = "tag-id">
+        &nbsp;
+        </ul>
+        <span style="font-size: 24px;" >
+          <nl>&nbsp; &nbsp;&nbsp;</span></p>
+
+    </div>
+
+  </div>
+  <div id="container">
+    <div id="innercontent">
+      <div class="chart-container" style="height: 410px;">
+        <canvas id="myChart" width="400" height="400"></canvas>
+
+      </div>
+      </div>
+      <br>
+
+  </div>
 
 
-  <div class="chart-container" style="height: 410px;">
-    <canvas id="myChart" width="400" height="400"></canvas>
-  </div>
-  <div>
-    <input type="button" id="transbutton" value="Transform Data" onclick="toggleState()">
-  </div>
-  <br>
-  <div>
-    <input type="range" min=".05" max="5" value="1" step=".05" class="slider" id="myRange" oninput="sliderFunction()">
-    Adjust the slope of the trendline.
-  </div>
 
+<div> Once you have transformed and fit your data, type in the coefficient and exponent that best describe the relationship:</div>
+<br>
+  <div id = "eq">Dep. Var. = <input type="text" id="coefficient" style= "width: 3em; "> [Indep. Var.]<sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
+<br>
+<input type="button" id="submit" value="submit" onclick="generateIdeal()">
+  <div id = 'error'></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
