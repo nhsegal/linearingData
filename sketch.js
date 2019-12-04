@@ -273,7 +273,7 @@ function generateIdeal() {
 
     idealSet.push({
       x: (i * xMax/10),
-      y: coeff *i * xMax / 10
+      y: coeff *(i * xMax / 10)**(exponent/exp)
     });
   }
 
