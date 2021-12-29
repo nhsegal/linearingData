@@ -10,6 +10,14 @@
   <p>
     <h1>Determine the Mathematical Relationship Between the Independent and Dependent Variables</h1>
   </p>
+  In math class we typically label the horizontal axis of a graph with <i>x</i> and the vertical axis with <i>y</i>. In physics class, we need to modify this convention a little to avoid confusion when we communicate. For example, if we believe the relationship between the elapsed time <i>t</i> that an object falls for and the distance <i>d</i> that it falls are related according to the equation <i>d = &frac12at<sup>2</sup></i>, where <i>a</i> is a constant, and gather a set of data measuring <i>d</i> for various values of <i>t</i>, we might want to examine it by plotting <i>d</i> vs. <i>t</i>. We also might find it helpful to plot <i>d</i> vs. <i>t<sup>2</sup></i>. This latter type of plot is sometimes unfamiliar to students. Why is it helpful? What sort of shape would we expect if the data fit our proposed equation? This website is intended to helpful students answer such questions.
+ <br>
+ <br>
+  The graph initially displays a set of data where the dependent variable is plotted against the independent variable. Two variables are related by some power law. (<i>i.e.</i> They fit the equation <i>y=Ax<sup>B</sup></i>.) The data also has a little bit of noise in it. Notice how the plot changes when you select different horizontal axes for the same dataset. One plot should be nearly linear, and you can determine the equation of the line of best fit. This equation also yields the power law that describes the relationship between the independent and dependent variables.
+  <p>
+     <br>
+
+  <div id="navbar">
   <div id="navbar">
     <div id="innernavbar">
         <input type="button" id="newDataSet" value="New Data Set" onclick="reset()">
@@ -51,6 +59,7 @@
 <br>
 <input type="button" id="submit" value="submit" onclick="generateIdeal()">
   <div id = 'error'></div>
+  <p>After submitting the equation for the line of best fit on the transformed data, you can select [Independent Variable] as the horizontal axis. The equation for line you determined also determines the curve that best fits this graph. Returning to our earlier example, if <i>d</i> is directly proportional to <i>t<sup>2</sup></i> a plot of <i>d</i> vs. <i>t<sup>2</sup></i> is linear and a plot of <i>d</i> vs. <i>t</i> has a parabolic shape. It is a lot easier to judge the linearity of a plot, draw a straight line on it, and determine its slope than it is to judge how closely a plot resembles a parabola, draw a parabola of best fit through the data, and determine that curve's equation. This is one reason we sometimes plot transformations of data.</p>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
