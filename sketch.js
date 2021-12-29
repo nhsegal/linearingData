@@ -19,8 +19,6 @@ let preLineMax = 0;
 let xMax;
 let prevExp;
 
-
-
 function pickExponent() {
   let num = Math.random();
   if (num > 0.66) {
@@ -269,11 +267,12 @@ function generateIdeal() {
     document.getElementById('error').innerHTML = "To fit the data, try picking the exponent from the set [-2, -1, 1, 2]."
     return;
   }
-  for (let i = 1; i < 11; i++) {
-
+  idealSet = [];
+  for (let i = 1; i < 30; i++) {
+    
     idealSet.push({
-      x: (i * xMax/10),
-      y: coeff *(i * xMax / 10)**(exponent/exp)
+      x: (i * xMax/29),
+      y: coeff *(i * xMax / 29)**(exponent/exp)
     });
   }
 
@@ -289,7 +288,6 @@ function generateIdeal() {
     pointRadius: 0
   }
 
-
   myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
   //myChartJS.options.scales.xAxes[0].ticks.max = xMax;
 
@@ -298,12 +296,12 @@ function generateIdeal() {
 }
 
 function reset() {
-
   myChart = null;
   rawData = [];
   sqData = [];
   invData = [];
   invSqData = [];
+  idealSet = [];
   k = (Math.random() * 5);
   pickExponent();
   makeData();
@@ -319,4 +317,5 @@ function reset() {
   myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
   document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
   document.getElementById("myRange").value = 0;
+  myChartJS.update();
 }
