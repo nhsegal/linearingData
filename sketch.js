@@ -27,22 +27,22 @@ function pickExponent() {
   let num = Math.random();
   if (num > 0.66) {
     exponent = 2;
-    xSymbol = 't';
-    ySymbol = 'd';
+    xSymbol = 'Time \u{1D461}';
+    ySymbol = 'Distance \u{1D451}';
     xUnits = 's';
     yUnits = 'm';
   } else if (num > 0.33) {
     exponent = -1;
-    xSymbol = 'm';
-    ySymbol = 'a';
+    xSymbol = 'Mass \u{1D45A}';
+    ySymbol = 'Acceleration \u{1D44E}';
     xUnits = 'kg';
-    yUnits = 'm/s^2';
+    yUnits = `m/s\u00B2`;
   } else {
     exponent = -2;
-    xSymbol = 'd';
-    ySymbol = 'I';
+    xSymbol = 'Distance \u{1D451}';
+    ySymbol = 'Intensity \u{1D43C}';
     xUnits = 'm';
-    yUnits = 'W/m^2';
+    yUnits = `W/m\u00B2`;
   }
   /*
   if (exponent == 2) {
@@ -161,6 +161,12 @@ function chartData(data) {
           borderColor: 'rgb(75, 192, 192)',
           borderWidth: 4,
         }]
+      },
+      layout: {
+        padding: {
+          right: 30,
+          bottom: 10
+        }
       },
       responsive: true,
       maintainAspectRatio: true,
