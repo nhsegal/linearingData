@@ -16,9 +16,9 @@
     <!--
     <button type="button">Show Explanation</button>
     -->
-    <input type="button" id="newDataSet" value="New Data Set" onclick="reset()">
+    <button type="button" id="newDataSet" onclick="reset()">New Data Set</button>
       
-            <h2>Select the horizontal axis:</h2>
+    <h2>Select the horizontal axis:</h2>
              <input type="radio" name="xAx" value=1 id="rawDat" checked="checked"> 
              <label for="rawDat"> [Independent Variable]</label><br>       
               <input type="radio" name="xAx" value=2 id="sqDat"> 
@@ -30,7 +30,7 @@
             
             <h2>Adjust the slope of the trendline:</h2>
              <input type="range" min=".05" max="5" value="0" step=".05" class="slider" id="myRange" oninput="sliderFunction()">
-            <h2>Trendline Equation:</h2>
+            <h2>Trendline equation:</h2>
             <div class="eq-label">Math Class Version</div>
             <div class="trendline-container-math">
               <div class="trendline" id= "trendline-equation-y-math">
@@ -65,12 +65,13 @@
             
         </div>
         <div class="right">
-    
+          <h2>Plot a curve:</h2>
           <div> Once you have transformed and fit your data, type in the coefficient and exponent that best describe the relationship:</div>
           <br>
-            <div id = "eq">Dep. Var. = <input type="text" id="coefficient" style= "width: 3em; "> [Indep. Var.]<sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
+            <div id = "eq">
+              <div id = 'dep-var'>Dep. Var.</div> = <input type="text" id="coefficient"> <div id = indep-var>[Indep. Var.]</div><sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
           <br>
-          <input type="button" id="submit" value="submit" onclick="generateIdeal()">
+          <button type="button" id="submit"  onclick="generateIdeal()">Submit</button>
             <div id = 'error'></div>
            
         

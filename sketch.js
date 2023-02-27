@@ -28,7 +28,7 @@ let yUnits;
 
 function pickExponent() {
   const num = Math.random();
-  if (num > 0.96) {
+  if (num > 0.06) {
     exponent = 2;
     return;
   }
@@ -45,6 +45,8 @@ function alterHTML(exp) {
   const sqDat = document.querySelector('label[for="sqDat"]');
   const invDat = document.querySelector('label[for="invDat"]');
   const invSqDat = document.querySelector('label[for="invSqDat"]');
+  const indepVar = document.querySelector('#indep-var');
+  const depVar = document.querySelector('#dep-var');
 
   switch (exp) {
     case 2:
@@ -58,6 +60,8 @@ function alterHTML(exp) {
       sqDat.textContent = `${xName}\u{00B2}`;
       invDat.textContent = `${xName}\u{207B}\u{00B9}`;
       invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+      indepVar.textContent = `${xSymbol}`
+      depVar.textContent = `${ySymbol}`
       break;
     case -1:
       xName = "Mass";

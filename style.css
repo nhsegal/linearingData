@@ -67,6 +67,19 @@ input[type=button] {
   margin: 0;
 }
 
+button {
+  background: #99ddee;
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 5px;
+  width: 100%;
+  color: black;
+  font-size: 16px;
+  padding: 5px 10px 5px 10px; 
+  text-decoration: none;
+  margin: 0;
+}
+
 input[type=range] {
   margin: 0 0 0 2rem;
 }
@@ -79,11 +92,25 @@ span {
   margin-left: 0px;
 }
 
-
-#eq{
-  font-family: sans-serif;
+#eq {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap:2px;
+  font-size: 2rem;
 }
 
+
+ #dep-var, #indep-var{
+  display: inline;
+  font-size: 2rem;
+}
+
+#exp{
+  position: relative;
+  top: -1.5rem;
+}
 
 
 ul {
@@ -156,3 +183,8 @@ ul {
   }
 .fraction span.fdn {border-top: thin solid black;}
 .fraction span.bar {display: none;}
+
+#coefficient {
+  width: 4rem;
+  height: 2rem;
+}
