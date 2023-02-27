@@ -1,11 +1,10 @@
-
 const numberOfDatapoints = 12;
 let rawData = [];
 let xlabels = [];
 let xRange = [];
 let yRange = [];
 let k = (1 + Math.random() * 3);
-let noiseAmp;
+let noiseAmp = 0;
 let exponent;
 
 let sqData = [];
@@ -19,32 +18,46 @@ let preLineMax = 0;
 let xMax;
 let prevExp;
 
+let xSymbol;
+let xUnits;
+let ySymbol;
+let yUnits;
+
 function pickExponent() {
   let num = Math.random();
   if (num > 0.66) {
     exponent = 2;
+    xSymbol = 't';
+    ySymbol = 'd';
+    xUnits = 's';
+    yUnits = 'm';
   } else if (num > 0.33) {
     exponent = -1;
+    xSymbol = 'm';
+    ySymbol = 'a';
+    xUnits = 'kg';
+    yUnits = 'm/s^2';
   } else {
     exponent = -2;
+    xSymbol = 'd';
+    ySymbol = 'I';
+    xUnits = 'm';
+    yUnits = 'W/m^2';
   }
-
+  /*
   if (exponent == 2) {
     noiseAmp = k * 4;
   }
-
   if (exponent == 1) {
     noiseAmp = k + 1;
   }
-
   if (exponent == -1) {
     noiseAmp = k / 10;
   }
-
   if (exponent == -2) {
     noiseAmp = k / 24;
   }
-
+  */
 }
 
 function makeData() {
@@ -155,7 +168,7 @@ function chartData(data) {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Dependent Variable',
+            labelString: `${ySymbol} (${yUnits})`,
             fontSize: 16
           },
           ticks: {
@@ -171,7 +184,7 @@ function chartData(data) {
           display: true,
           scaleLabel: {
             display: true,
-            labelString: 'Independent Variable',
+            labelString: `${xSymbol} (${xUnits})`,
             fontSize: 16
           },
           ticks: {
