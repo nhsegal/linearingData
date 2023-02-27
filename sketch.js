@@ -18,62 +18,70 @@ let preLineMax = 0;
 let xMax;
 let prevExp;
 
+let xName;
 let xSymbol;
 let xUnits;
+let yName;
 let ySymbol;
 let yUnits;
 
 function pickExponent() {
   const num = Math.random()
-  if (num > 0.66) {
+  if (num > 0.96) {
     exponent = 2;
     return
   } 
-  if (num > 0.33) {
+  if (num > 0.03) {
     exponent = -1;
     return
   } 
    
   exponent = -2;
   return
-  /*
-  if (exponent == 2) {
-    noiseAmp = k * 4;
-  }
-  if (exponent == 1) {
-    noiseAmp = k + 1;
-  }
-  if (exponent == -1) {
-    noiseAmp = k / 10;
-  }
-  if (exponent == -2) {
-    noiseAmp = k / 24;
-  }
-  */
 }
 
 function alterHTML(exp) {
-  const rawVar = document.querySelector('label[for="rawDat"]');
-  console.log(rawVar)
+  const rawDat = document.querySelector('label[for="rawDat"]');
+  const sqDat = document.querySelector('label[for="sqDat"]');
+  const invDat = document.querySelector('label[for="invDat"]');
+  const invSqDat = document.querySelector('label[for="invSqDat"]');
+
   switch (exp) {
     case 2:
-      xSymbol = "Time \u{1D461}";
-      ySymbol = "Distance \u{1D451}";
+      xName = "Time"
+      xSymbol = "\u{1D461}";
+      yName = "Distance"
+      ySymbol = "\u{1D451}";
       xUnits = "s";
       yUnits = "m";
-      //rawVar.textContent = 'Time\u00B2 \u{1D461}\u00B2'
+      rawDat.textContent = `${xName}`
+      sqDat.textContent = `${xName}\u{00B2}`
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
       break;
     case -1:
-      xSymbol = "Mass \u{1D45A}";
-      ySymbol = "Acceleration \u{1D44E}";
+      xName = "Mass" 
+      xSymbol ="\u{1D45A}";
+      yName = "Acceleration"
+      ySymbol = "\u{1D44E}";
       xUnits = "kg";
       yUnits = `m/s\u00B2`;
+      rawDat.textContent = `${xName}`
+      sqDat.textContent = `${xName}\u{00B2}`
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
       break;
     case -2:
-      xSymbol = "Distance \u{1D451}";
-      ySymbol = "Intensity \u{1D43C}";
+      xName = "Distance" 
+      xSymbol = "\u{1D451}";
+      xName = "Intensity" 
+      ySymbol = "\u{1D43C}";
       xUnits = "m";
       yUnits = `W/m\u00B2`;
+      rawDat.textContent = `${xName}`
+      sqDat.textContent = `${xName}\u{00B2}`
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
       break;
     default:
     console.log('error?')
@@ -216,7 +224,7 @@ function chartData(data) {
           {
             scaleLabel: {
               display: true,
-              labelString: `${ySymbol} (${yUnits})`,
+              labelString: `${yName} ${ySymbol} (${yUnits})`,
               fontSize: 16,
             },
             ticks: {
@@ -234,7 +242,7 @@ function chartData(data) {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: `${xSymbol} (${xUnits})`,
+              labelString: `${xName} ${xSymbol} (${xUnits})`,
               fontSize: 16,
             },
             ticks: {
@@ -273,7 +281,7 @@ while (x--) {
       if (this.value == 1) {
         myChartJS.data.datasets[0].data = rawData;
         myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-          "[Independent Variable]";
+        `${xName} ${xSymbol} (${xUnits})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -284,7 +292,7 @@ while (x--) {
       } else if (this.value == 2) {
         myChartJS.data.datasets[0].data = sqData;
         myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-          "[Independent Variable]\u00B2";
+        `${xName}\u{00B2} ${xSymbol}\u{00B2} (${xUnits}\u{00B2})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -295,7 +303,7 @@ while (x--) {
       } else if (this.value == -1) {
         myChartJS.data.datasets[0].data = invData;
         myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-          "[Independent Variable]\u207B\u00B9";
+      `${xName}\u{207B}\u{00B9} ${xSymbol}\u{207B}\u{00B9} (${xUnits}\u{207B}\u{00B9})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -306,7 +314,7 @@ while (x--) {
       } else if (this.value == -2) {
         myChartJS.data.datasets[0].data = invSqData;
         myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-          "[Independent Variable]\u207B\u00B2";
+ `${xName}\u{207B}\u{00B2} ${xSymbol}\u{207B}\u{00B2} (${xUnits}\u{207B}\u{00B2})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -326,8 +334,14 @@ function sliderFunction() {
   let val = document.getElementById("myRange").value;
   myChartJS.options.annotation.annotations[0].endValue = val;
   myChartJS.update();
-  document.getElementById("tag-id").innerHTML =
-    "y = " + Math.round((100 * val) / xMax) / 100 + "x ";
+  document.getElementById("trendline-equation-y").textContent =
+    `${ySymbol} = `
+  document.getElementById("trendline-equation-slope").textContent =
+    `${Math.round((100 * val) / xMax) / 100}`
+  //document.getElementById("trendline-equation-units").textContent =
+   // yUnits.sup() +'/' + xUnits.sub() +`${xSymbol}`;
+  document.getElementById("trendline-equation-x").innerHTML =
+    `${xSymbol}<sup>${exponent}</sup>`
 }
 
 function generateIdeal() {
