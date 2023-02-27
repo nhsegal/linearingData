@@ -18,7 +18,6 @@
           <div id="explanation">
             <div>
               In math class we typically label the horizontal axis of a graph with <i>x</i> and the vertical axis with <i>y</i>. In physics class, we need to modify this convention a little to avoid confusion when we communicate. For example, if we believe the relationship between the elapsed time <i>t</i> that an object falls for and the distance <i>d</i> that it falls are related according to the equation <i>d = &frac12at<sup>2</sup></i>, where <i>a</i> is a constant, and gather a set of data measuring <i>d</i> for various values of <i>t</i>, we might want to examine it by plotting <i>d</i> vs. <i>t</i>. We also might find it helpful to plot <i>d</i> vs. <i>t<sup>2</sup></i>. This latter type of plot is sometimes unfamiliar to students. Why is it helpful? What sort of shape would we expect if the data fit our proposed equation? This website is intended to helpful students answer such questions.
-           
             </div>
             <div>
                 
@@ -32,12 +31,16 @@
           
             </div>
             <p>Select the horizontal axis:</p>
-            <ul>
-              <input type="radio" name="xAx" value=1 id="rawDat" checked="checked"> [Independent Variable]<br>
-              <input type="radio" name="xAx" value=2 id="sqDat"> [Independent Variable]<sup>2</sup><br>
-              <input type="radio" name="xAx" value=-1 id="invDat"> [Independent Variable]<sup>-1</sup><br>
-              <input type="radio" name="xAx" value=-2 id="invSqDat"> [Independent Variable]<sup>-2</sup><br>
-            </ul>
+        
+             <input type="radio" name="xAx" value=1 id="rawDat" checked="checked"> 
+             <label for="rawDat"> [Independent Variable]</label><br>
+           
+     
+            
+              <input type="radio" name="xAx" value=2 id="sqDat"> [Independent Variable]<sup>2</sup>
+              <input type="radio" name="xAx" value=-1 id="invDat"> [Independent Variable]<sup>-1</sup>
+              <input type="radio" name="xAx" value=-2 id="invSqDat"> [Independent Variable]<sup>-2</sup>
+            
             <p>Adjust the slope of the trendline:</p>
              <input type="range" min=".05" max="5" value="0" step=".05" class="slider" id="myRange" oninput="sliderFunction()">
             <p style="line-height:50%;">Trendline Equation:</p>
