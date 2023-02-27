@@ -19,7 +19,6 @@
     <input type="button" id="newDataSet" value="New Data Set" onclick="reset()">
       
             <h2>Select the horizontal axis:</h2>
-        
              <input type="radio" name="xAx" value=1 id="rawDat" checked="checked"> 
              <label for="rawDat"> [Independent Variable]</label><br>       
               <input type="radio" name="xAx" value=2 id="sqDat"> 
@@ -29,10 +28,20 @@
               <input type="radio" name="xAx" value=-2 id="invSqDat"> 
               <label for="invSqDat"> [Independent Variable]</label><br>
             
-            <p>Adjust the slope of the trendline:</p>
+            <h2>Adjust the slope of the trendline:</h2>
              <input type="range" min=".05" max="5" value="0" step=".05" class="slider" id="myRange" oninput="sliderFunction()">
-            <p>Trendline Equation:</p>
-            <div class="trendline-container">
+            <h2>Trendline Equation:</h2>
+            <div class="eq-label">Math Class Version</div>
+            <div class="trendline-container-math">
+              <div class="trendline" id= "trendline-equation-y-math">
+              </div>
+              <div  class="trendline" id = "trendline-equation-slope-math">
+              </div>
+              <div class="trendline" id = "trendline-equation-x-math">
+              </div>
+            </div>
+            <div class="eq-label">Physics Class Version</div>
+            <div class="trendline-container-physics">
               <div class="trendline" id= "trendline-equation-y">
               </div>
               <div  class="trendline" id = "trendline-equation-slope">

@@ -6,6 +6,7 @@ let yRange = [];
 let k = 1 + Math.random() * 3;
 let noiseAmp = 0;
 let exponent;
+let fitExponent = 1;
 
 let sqData = [];
 let invData = [];
@@ -26,18 +27,17 @@ let ySymbol;
 let yUnits;
 
 function pickExponent() {
-  const num = Math.random()
+  const num = Math.random();
   if (num > 0.96) {
     exponent = 2;
-    return
-  } 
-  if (num > 0.03) {
+    return;
+  }
+  if (num > 0.93) {
     exponent = -1;
-    return
-  } 
-   
+    return;
+  }
   exponent = -2;
-  return
+  return;
 }
 
 function alterHTML(exp) {
@@ -48,43 +48,43 @@ function alterHTML(exp) {
 
   switch (exp) {
     case 2:
-      xName = "Time"
+      xName = "Time";
       xSymbol = "\u{1D461}";
-      yName = "Distance"
+      yName = "Distance";
       ySymbol = "\u{1D451}";
       xUnits = "s";
       yUnits = "m";
-      rawDat.textContent = `${xName}`
-      sqDat.textContent = `${xName}\u{00B2}`
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
+      rawDat.textContent = `${xName}`;
+      sqDat.textContent = `${xName}\u{00B2}`;
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
       break;
     case -1:
-      xName = "Mass" 
-      xSymbol ="\u{1D45A}";
-      yName = "Acceleration"
+      xName = "Mass";
+      xSymbol = "\u{1D45A}";
+      yName = "Acceleration";
       ySymbol = "\u{1D44E}";
       xUnits = "kg";
       yUnits = `m/s\u00B2`;
-      rawDat.textContent = `${xName}`
-      sqDat.textContent = `${xName}\u{00B2}`
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
+      rawDat.textContent = `${xName}`;
+      sqDat.textContent = `${xName}\u{00B2}`;
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
       break;
     case -2:
-      xName = "Distance" 
+      xName = "Distance";
       xSymbol = "\u{1D451}";
-      xName = "Intensity" 
+      yName = "Intensity";
       ySymbol = "\u{1D43C}";
       xUnits = "m";
       yUnits = `W/m\u00B2`;
-      rawDat.textContent = `${xName}`
-      sqDat.textContent = `${xName}\u{00B2}`
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`
+      rawDat.textContent = `${xName}`;
+      sqDat.textContent = `${xName}\u{00B2}`;
+      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
       break;
     default:
-    console.log('error?')
+      console.log("error?");
   }
 }
 
@@ -278,10 +278,10 @@ while (x--) {
   inputs[x].addEventListener(
     "change",
     function () {
+      fitExponent = this.value;
       if (this.value == 1) {
         myChartJS.data.datasets[0].data = rawData;
-        myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-        `${xName} ${xSymbol} (${xUnits})`;
+        myChartJS.options.scales.xAxes[0].scaleLabel.labelString = `${xName} ${xSymbol} (${xUnits})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -291,8 +291,7 @@ while (x--) {
         }
       } else if (this.value == 2) {
         myChartJS.data.datasets[0].data = sqData;
-        myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-        `${xName}\u{00B2} ${xSymbol}\u{00B2} (${xUnits}\u{00B2})`;
+        myChartJS.options.scales.xAxes[0].scaleLabel.labelString = `${xName}\u{00B2} ${xSymbol}\u{00B2} (${xUnits}\u{00B2})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -302,8 +301,7 @@ while (x--) {
         }
       } else if (this.value == -1) {
         myChartJS.data.datasets[0].data = invData;
-        myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
-      `${xName}\u{207B}\u{00B9} ${xSymbol}\u{207B}\u{00B9} (${xUnits}\u{207B}\u{00B9})`;
+        myChartJS.options.scales.xAxes[0].scaleLabel.labelString = `${xName}\u{207B}\u{00B9} ${xSymbol}\u{207B}\u{00B9} (${xUnits}\u{207B}\u{00B9})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -313,8 +311,7 @@ while (x--) {
         }
       } else if (this.value == -2) {
         myChartJS.data.datasets[0].data = invSqData;
-        myChartJS.options.scales.xAxes[0].scaleLabel.labelString =
- `${xName}\u{207B}\u{00B2} ${xSymbol}\u{207B}\u{00B2} (${xUnits}\u{207B}\u{00B2})`;
+        myChartJS.options.scales.xAxes[0].scaleLabel.labelString = `${xName}\u{207B}\u{00B2} ${xSymbol}\u{207B}\u{00B2} (${xUnits}\u{207B}\u{00B2})`;
         if (myChartJS.data.datasets[1]) {
           for (i = 0; i < myChartJS.data.datasets[1].data.length; i++) {
             myChartJS.data.datasets[1].data[i].x =
@@ -323,7 +320,7 @@ while (x--) {
           prevExp = -2;
         }
       }
-
+      sliderFunction();
       myChartJS.update();
     },
     0
@@ -334,14 +331,29 @@ function sliderFunction() {
   let val = document.getElementById("myRange").value;
   myChartJS.options.annotation.annotations[0].endValue = val;
   myChartJS.update();
-  document.getElementById("trendline-equation-y").textContent =
-    `${ySymbol} = `
+
+  document.getElementById("trendline-equation-slope-math").textContent =
+    Number.parseFloat(val / xMax).toFixed(2);
+  document.getElementById("trendline-equation-x-math").textContent = "x";
+  document.getElementById("trendline-equation-y").textContent = `${ySymbol} = (`;
   document.getElementById("trendline-equation-slope").textContent =
-    `${Math.round((100 * val) / xMax) / 100}`
-  //document.getElementById("trendline-equation-units").textContent =
-   // yUnits.sup() +'/' + xUnits.sub() +`${xSymbol}`;
-  document.getElementById("trendline-equation-x").innerHTML =
-    `${xSymbol}<sup>${exponent}</sup>`
+    Number.parseFloat(val / xMax).toFixed(2);
+  document.getElementById("trendline-equation-y-math").textContent = `y = `;
+
+  document.getElementById("fup").textContent = yUnits;
+
+
+  if (fitExponent != 1) {
+    document.getElementById(
+      "trendline-equation-x"
+    ).innerHTML = `) ${xSymbol}<sup>${fitExponent}</sup>`;
+    document.getElementById("fdn").innerHTML = `${xUnits}${fitExponent.sup()}`;
+
+  } else {
+    document.getElementById("trendline-equation-x").innerHTML = `) ${xSymbol}`;
+    document.getElementById("fdn").innerHTML = `${xUnits}`;
+
+  }
 }
 
 function generateIdeal() {
