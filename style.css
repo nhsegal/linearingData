@@ -1,17 +1,43 @@
+*{
+  box-sizing: border-box;
+}
 h1 {
-  font-size: 26px;
-  padding: 1px;
+  font-size: 32px;
+  margin: 1rem 2rem;
 }
 
-p {
-  padding: 0px;
-  margin: 2px;
+#explanation {
+  display: none;
 }
 
 body {
-  font-family: Georgia;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin-left: 1em;
   background: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+}
+
+.left{
+  width: calc(50% - 250px);
+}
+
+.center{
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+
+.right{
+  width: calc(50% - 250px);
 }
 
 input[type=button] {
@@ -36,9 +62,9 @@ input[type=range] {
 
 span {
   margin-left: 0px;
-
 }
 
+/*
 canvas {
   float: left;
   background-color: white;
@@ -48,8 +74,10 @@ canvas {
   padding-right: 15px;
   padding-top: 15px;
   border-radius: 10px;
+  width: 400px;
 }
-
+*/
+/*
 .chart-container {
   display: flex;
   position: relative;
@@ -57,38 +85,20 @@ canvas {
   padding-left: 0px;
   padding-right: 0px;
   left: 0px;
-
 }
-
+*/
 #eq{
   font-family: sans-serif;
 }
 
-#innercontent {
-  float: left;
-  width: 480px;
-  padding-left: 0px;
-  padding-right: 10px;
 
-
-}
 
 ul {
   font-family: sans-serif;
 
 }
 
-#navbar {
 
-}
-
-#innernavbar {
-  float: left;
-  width: 25%;
-  padding-left: 5px;
-  padding-right: 5px;
-
-}
 
 #tag-id {
   font-size: 20px;
@@ -99,5 +109,4 @@ ul {
   margin-left: 2em;
   padding-top: 6px;
   align: center;
-
 }

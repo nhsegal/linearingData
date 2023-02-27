@@ -134,6 +134,7 @@ function chartData(data) {
       }]
     },
     options: {
+      aspectRatio: 1,
       legend: {
         display: false
       },
@@ -148,7 +149,7 @@ function chartData(data) {
           borderWidth: 4,
         }]
       },
-      responsive: false,
+      responsive: true,
       maintainAspectRatio: true,
       scales: {
         yAxes: [{
