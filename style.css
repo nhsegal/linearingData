@@ -24,6 +24,7 @@ body {
 main{
   display: flex;
   flex-direction: row;
+  gap: 20px;
 }
 
 .left{
@@ -31,10 +32,18 @@ main{
 }
 
 .center{
-  width: 500px;
+ 
+}
+
+.chart-container{
+  width: 490px;
   height: 500px;
   border: 1px solid black;
+  padding: 25px 2px 5px 10px; 
+  border-radius: 10px;
+  background-color: white;
 }
+
 
 .right{
   width: calc(50% - 250px);
