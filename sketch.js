@@ -32,7 +32,7 @@ function pickExponent() {
     exponent = 2;
     return;
   }
-  if (num > 0.93) {
+  if (num > 0.03) {
     exponent = -1;
     return;
   }
@@ -48,6 +48,7 @@ function alterHTML(exp) {
   const indepVar = document.querySelector('#indep-var');
   const depVar = document.querySelector('#dep-var');
 
+
   switch (exp) {
     case 2:
       xName = "Time";
@@ -56,12 +57,6 @@ function alterHTML(exp) {
       ySymbol = "\u{1D451}";
       xUnits = "s";
       yUnits = "m";
-      rawDat.textContent = `${xName}`;
-      sqDat.textContent = `${xName}\u{00B2}`;
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
-      indepVar.textContent = `${xSymbol}`
-      depVar.textContent = `${ySymbol}`
       break;
     case -1:
       xName = "Mass";
@@ -70,10 +65,7 @@ function alterHTML(exp) {
       ySymbol = "\u{1D44E}";
       xUnits = "kg";
       yUnits = `m/s\u00B2`;
-      rawDat.textContent = `${xName}`;
-      sqDat.textContent = `${xName}\u{00B2}`;
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+     
       break;
     case -2:
       xName = "Distance";
@@ -82,14 +74,17 @@ function alterHTML(exp) {
       ySymbol = "\u{1D43C}";
       xUnits = "m";
       yUnits = `W/m\u00B2`;
-      rawDat.textContent = `${xName}`;
-      sqDat.textContent = `${xName}\u{00B2}`;
-      invDat.textContent = `${xName}\u{207B}\u{00B9}`;
-      invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+     
       break;
     default:
       console.log("error?");
   }
+  rawDat.textContent = `${xName}`;
+  sqDat.textContent = `${xName}\u{00B2}`;
+  invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+  invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+  indepVar.textContent = `${xSymbol}`
+  depVar.textContent = `${ySymbol}`
 }
 
 function makeData() {
@@ -99,9 +94,7 @@ function makeData() {
       xx = 10*(1+i)/numberOfDatapoints + noiseAmp*(Math.round(Math.random()*10)/10 - 0.5);
     }
     let yy = Math.round(100*(coefficient * (xx + (1+0.5*exponent)*(4/(i+4))*noiseAmp*(Math.round(Math.random()*10)/10 - 0.5))**exponent))/100;
-   // while (yy <= 0){
-   //   yy = Math.round(100*(coefficient * (xx + (1+0.5*exponent)*(5/i)*noiseAmp*(Math.round(Math.random()*10)/10 - 0.5))**exponent))/100;
-   // }
+   
     
   rawData.push({
     x: Math.round(100 * xx) / 100,
