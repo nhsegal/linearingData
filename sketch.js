@@ -28,7 +28,7 @@ let yUnits;
 
 function pickExponent() {
   const num = Math.random();
-  if (num > 0.66) {
+  if (num > 0.96) {
     exponent = 2;
     return;
   }
@@ -54,21 +54,20 @@ function alterHTML(exp) {
 
   switch (exp) {
     case 2:
-      xName = "Time";
-      xSymbol = "\u{1D461}";
-      yName = "Distance";
-      ySymbol = "\u{1D451}";
-      xUnits = "s";
-      yUnits = "m";
+      xName = "Side Length";
+      xSymbol = "\u{1D459}";
+      yName = "Mass";
+      ySymbol = "\u{1D45a}";
+      xUnits = "cm";
+      yUnits = "g";
       break;
     case -1:
-      xName = "Mass";
-      xSymbol = "\u{1D45A}";
-      yName = "Acceleration";
-      ySymbol = "\u{1D44E}";
-      xUnits = "kg";
-      yUnits = `m/s\u00B2`;
-     
+      xName = "Length";
+      xSymbol = "\u{1D459}";
+      yName = "Height";
+      ySymbol = "\u{210E}";
+      xUnits = "cm";
+      yUnits = "cm";
       break;
     case -2:
       xName = "Distance";
@@ -337,13 +336,21 @@ function generateIdeal() {
       "To fit the data, try picking the exponent from the set [-2, -1, 1, 2].";
     return;
   }
+  if (fitExponent == -2){
+    for (let i = 1; i < 10; i++) {
+    idealSet.push({
+      x:  xMax*0.002*i,
+      y: coeff * ( xMax*0.002*i) ** (exp/fitExponent),
+    });
+  }
+}
   for (let i = 1; i < 30; i++) {
     idealSet.push({
       x: (i * xMax) / 29,
       y: coeff * ((i * xMax) / 29) ** (exp/fitExponent),
     });
   }
-
+  
 
   myChartJS.data.datasets[1] = {
     label: "Ideal Data Set",
@@ -358,12 +365,11 @@ function generateIdeal() {
   };
 
   myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
-  //myChartJS.options.scales.xAxes[0].ticks.max = xMax;
-
   myChartJS.update();
 }
 
 function reset() {
+
   myChart = null;
   rawData = [];
   sqData = [];
@@ -372,6 +378,7 @@ function reset() {
   idealSet = [];
   coefficient = Math.random() * 5;
   pickExponent();
+  alterHTML(exponent);
   makeData();
   myChartJS.options.scales.yAxes[0].ticks.max = undefined;
   myChartJS.data.datasets[0].data = rawData;
@@ -389,6 +396,12 @@ function reset() {
   document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
   document.getElementById("myRange").value = 0;
   myChartJS.update();
+  
+
+
+  chartData(data);
+  myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
+  document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
 }
 
 function showModal(){
