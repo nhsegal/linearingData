@@ -3,7 +3,7 @@ let rawData = [];
 let xlabels = [];
 let xRange = [];
 let yRange = [];
-let coefficient = 1 + Math.random() * 3;
+let coefficient = 10 + Math.random() * 5;
 let noiseAmp = 0.7;
 let exponent;
 let fitExponent = 1;
@@ -28,7 +28,7 @@ let yUnits;
 
 function pickExponent() {
   const num = Math.random();
-  if (num > 0.96) {
+  if (num > 0.66) {
     exponent = 2;
     return;
   }
