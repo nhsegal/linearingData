@@ -28,11 +28,11 @@ let yUnits;
 
 function pickExponent() {
   const num = Math.random();
-  if (num > 0.96) {
+  if (num > 0.66) {
     exponent = 2;
     return;
   }
-  if (num > 0.03) {
+  if (num > 0.33) {
     exponent = -1;
     return;
   }
@@ -47,6 +47,9 @@ function alterHTML(exp) {
   const invSqDat = document.querySelector('label[for="invSqDat"]');
   const indepVar = document.querySelector('#indep-var');
   const depVar = document.querySelector('#dep-var');
+
+  const fup2 = document.querySelector('#fup-2');
+  const fdn2 = document.querySelector('#fdn-2');
 
 
   switch (exp) {
@@ -85,6 +88,8 @@ function alterHTML(exp) {
   invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
   indepVar.textContent = `${xSymbol}`
   depVar.textContent = `${ySymbol}`
+  fup2.textContent = `${yUnits}`
+  fdn2.textContent = `${xUnits}`
 }
 
 function makeData() {
@@ -264,6 +269,20 @@ while (x--) {
           prevExp = -2;
         }
       }
+     // const fup2 = document.querySelector('#fup-2');
+     // const fdn2 = document.querySelector('#fdn-2');
+     // fup2.textContent = `${yUnits}`
+      //fdn2.textContent = `(${xUnits})^${fitExponent}`
+
+
+      if (fitExponent != 1) {
+        document.getElementById("fdn-2").innerHTML = `${xUnits}${fitExponent.sup()}`;
+      } else {
+        document.getElementById("fdn").innerHTML = `${xUnits}`;
+      }
+      document.getElementById("fup-2").innerHTML = `${yUnits}`;
+
+
       sliderFunction();
       myChartJS.update();
     },
@@ -317,15 +336,7 @@ function generateIdeal() {
       y: coeff * ((i * xMax) / 29) ** (exp/fitExponent),
     });
   }
-  //console.log(idealSet)
-  let setToPlot = (idealSet.map((obj)=> { 
-    return {
-      x: obj.x, 
-      y: obj.y**(-prevExp)
-    }
-   
-  }))
-  console.log(setToPlot.length)
+
 
   myChartJS.data.datasets[1] = {
     label: "Ideal Data Set",

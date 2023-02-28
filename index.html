@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>Determine the Mathematical Relationship</h1>
+    <h1>Fit the Data</h1>
 <main>
   <div class="left">  
     <!--
@@ -69,7 +69,13 @@
           <div> Once you have transformed and fit your data, type in the coefficient and exponent that best describe the relationship:</div>
           <br>
             <div id = "eq">
-              <div id = 'dep-var'>Dep. Var.</div> = <input type="text" id="coefficient"> <div id = indep-var>[Indep. Var.]</div><sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
+              <div id = 'dep-var'>Dep. Var.</div> = (<input type="text" id="coefficient"> 
+              <div class="fraction trendline" id="slope-units-2">
+                <span class="fup" id="fup-2"></span>
+                <span class="bar">/</span>
+                <span class="fdn" id="fdn-2"></span>
+              </div>
+              )<div id = indep-var>[Indep. Var.]</div><sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
           <br>
           <button type="button" id="submit"  onclick="generateIdeal()">Submit</button>
             <div id = 'error'></div>
