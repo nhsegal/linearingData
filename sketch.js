@@ -305,19 +305,27 @@ function generateIdeal() {
   let coeff = document.getElementById("coefficient").value;
   let exp = parseInt(document.getElementById("exp").value);
   let idealSet = [];
-  console.log(exp);
+
   if (!(exp == -2 || exp == -1 || exp == 1 || exp == 2)) {
     document.getElementById("error").innerHTML =
       "To fit the data, try picking the exponent from the set [-2, -1, 1, 2].";
     return;
   }
-  idealSet = [];
   for (let i = 1; i < 30; i++) {
     idealSet.push({
       x: (i * xMax) / 29,
-      y: coeff * ((i * xMax) / 29) ** (exponent / exp),
+      y: coeff * ((i * xMax) / 29) ** (exp/fitExponent),
     });
   }
+  //console.log(idealSet)
+  let setToPlot = (idealSet.map((obj)=> { 
+    return {
+      x: obj.x, 
+      y: obj.y**(-prevExp)
+    }
+   
+  }))
+  console.log(setToPlot.length)
 
   myChartJS.data.datasets[1] = {
     label: "Ideal Data Set",
