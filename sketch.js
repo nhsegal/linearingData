@@ -368,9 +368,14 @@ function reset() {
   makeData();
   myChartJS.options.scales.yAxes[0].ticks.max = undefined;
   myChartJS.data.datasets[0].data = rawData;
-  if (myChartJS.data.datasets[1].data) {
-    myChartJS.data.datasets[1].data = null;
-  }
+  if (myChartJS.data.datasets[1]) {
+    myChartJS.data.datasets[1] = {};
+  } 
+
+			
+  //else if (myChartJS.data.datasets[1].data) {
+  //  myChartJS.data.datasets[1].data = null;
+  //}
   myChartJS.options.animation.duration = 0;
   myChartJS.options.annotation.annotations[0].endValue = 0;
   myChartJS.update();
