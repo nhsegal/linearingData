@@ -3,8 +3,8 @@ let rawData = [];
 let xlabels = [];
 let xRange = [];
 let yRange = [];
-let k = 1 + Math.random() * 3;
-let noiseAmp = 0;
+let coefficient = 1 + Math.random() * 3;
+let noiseAmp = 0.7;
 let exponent;
 let fitExponent = 1;
 
@@ -28,7 +28,7 @@ let yUnits;
 
 function pickExponent() {
   const num = Math.random();
-  if (num > 0.06) {
+  if (num > 0.96) {
     exponent = 2;
     return;
   }
@@ -93,89 +93,36 @@ function alterHTML(exp) {
 }
 
 function makeData() {
-  if (exponent == 1) {
-    for (let i = 0; i < numberOfDatapoints; i++) {
-      let xx = Math.floor(Math.random() * 41) / 4; //random between 0 and 10, .25 intervals
-      let yy =
-        Math.round(
-          10 *
-            Math.max(k * xx ** exponent + noiseAmp * (Math.random() - 0.5), 0)
-        ) / 10;
-      rawData.push({
-        x: xx,
-        y: yy,
-      });
-      sqData.push({
-        x: Math.round(1000 * xx ** 2) / 1000,
-        y: yy,
-      });
-      invData.push({
-        x: Math.round(1000 * xx ** -1) / 1000,
-        y: yy,
-      });
-      invSqData.push({
-        x: Math.round(1000 * xx ** -2) / 1000,
-        y: yy,
-      });
+  for (let i = 0; i < numberOfDatapoints; i++) { 
+    let xx = 10*(1+i)/numberOfDatapoints + noiseAmp*(Math.round(Math.random()*10)/10 - 0.5);
+    while (xx <= 0){
+      xx = 10*(1+i)/numberOfDatapoints + noiseAmp*(Math.round(Math.random()*10)/10 - 0.5);
     }
-  } else if (exponent == 2) {
-    for (let i = 0; i < numberOfDatapoints; i++) {
-      let xx = Math.floor(Math.random() * 41) / 4; //random between 0 and 10, .25 intervals
-      let yy =
-        Math.round(
-          10 *
-            Math.max(
-              (k / 3) * xx ** exponent + noiseAmp * (Math.random() - 0.5),
-              0
-            )
-        ) / 10;
-      rawData.push({
-        x: xx,
-        y: yy,
-      });
-      sqData.push({
-        x: Math.round(1000 * xx ** 2) / 1000,
-        y: yy,
-      });
-      invData.push({
-        x: Math.round(1000 * xx ** -1) / 1000,
-        y: yy,
-      });
-      invSqData.push({
-        x: Math.round(1000 * xx ** -2) / 1000,
-        y: yy,
-      });
-    }
-  } else if (exponent < 0) {
-    for (let i = 0; i < numberOfDatapoints; i++) {
-      let upperBound = Math.random();
-      let xx =
-        Math.floor(k * 10) / 20 +
-        Math.floor(upperBound * Math.random() * 41) / 4;
-      let yy =
-        Math.round(
-          40 *
-            Math.max(k * xx ** exponent + noiseAmp * (Math.random() - 0.5), 0)
-        ) / 4;
-      rawData.push({
-        x: xx,
-        y: yy,
-      });
-      sqData.push({
-        x: Math.round(1000 * xx ** 2) / 1000,
-        y: yy,
-      });
-      invData.push({
-        x: Math.round(1000 * xx ** -1) / 1000,
-        y: yy,
-      });
-      invSqData.push({
-        x: Math.round(1000 * xx ** -2) / 1000,
-        y: yy,
-      });
-    }
+    let yy = Math.round(100*(coefficient * (xx + (1+0.5*exponent)*(4/(i+4))*noiseAmp*(Math.round(Math.random()*10)/10 - 0.5))**exponent))/100;
+   // while (yy <= 0){
+   //   yy = Math.round(100*(coefficient * (xx + (1+0.5*exponent)*(5/i)*noiseAmp*(Math.round(Math.random()*10)/10 - 0.5))**exponent))/100;
+   // }
+    
+  rawData.push({
+    x: Math.round(100 * xx) / 100,
+    y: Math.round(yy*100)/100,
+  });
+  sqData.push({
+    x: Math.round(100 * xx ** 2) / 100,
+    y: Math.round(yy*100)/100,
+  });
+  invData.push({
+    x: Math.round(1000 * xx ** -1) / 1000,
+    y: Math.round(yy*100)/100,
+  });
+  invSqData.push({
+    x: Math.round(1000 * xx ** -2) / 1000,
+    y: Math.round(yy*100)/100,
+  });
+ 
   }
   data = rawData;
+ 
 }
 
 function chartData(data) {
@@ -404,7 +351,7 @@ function reset() {
   invData = [];
   invSqData = [];
   idealSet = [];
-  k = Math.random() * 5;
+  coefficient = Math.random() * 5;
   pickExponent();
   makeData();
   myChartJS.options.scales.yAxes[0].ticks.max = undefined;
