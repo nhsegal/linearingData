@@ -208,6 +208,13 @@ function chartData(data) {
   });
 }
 
+const modal = document.getElementById("modal");
+span = document.getElementsByClassName("close")[0];
+span.onclick = function () {
+  modal.classList.remove("visible");
+};
+
+
 window.addEventListener("DOMContentLoaded", (event) => {
   pickExponent();
   alterHTML(exponent);
@@ -372,10 +379,6 @@ function reset() {
     myChartJS.data.datasets[1] = {};
   } 
 
-			
-  //else if (myChartJS.data.datasets[1].data) {
-  //  myChartJS.data.datasets[1].data = null;
-  //}
   myChartJS.options.animation.duration = 0;
   myChartJS.options.annotation.annotations[0].endValue = 0;
   myChartJS.update();
@@ -386,4 +389,8 @@ function reset() {
   document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
   document.getElementById("myRange").value = 0;
   myChartJS.update();
+}
+
+function showModal(){
+  modal.classList.add("visible");
 }
