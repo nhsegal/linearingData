@@ -240,3 +240,20 @@ ul {
   text-decoration: none;
   cursor: pointer;
 }
+
+.trendline-container-fitted {
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: blue;
+  font-size: 1rem;
+  position: relative;
+    left: 9rem;
+    top: -9rem;
+}
+
+#trendline-equation-x-3, #trendline-equation-y-3, #trendline-equation-slope-3{
+  font-size: 1.5rem;
+}
+

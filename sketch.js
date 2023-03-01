@@ -366,6 +366,18 @@ function generateIdeal() {
 
   myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
   myChartJS.update();
+
+  const fup3 = document.querySelector('#fup3');
+  const fdn3 = document.querySelector('#fdn3');
+  const yvar = document.querySelector('#trendline-equation-y-3');
+  const xvar = document.querySelector('#trendline-equation-x-3');
+  const slope3 = document.querySelector('#trendline-equation-slope-3');
+  yvar.textContent = `${ySymbol} = (`
+  slope3.textContent = `${coeff}`
+  xvar.innerHTML = `) ${xSymbol}<sup style= 'font-size: 0.75rem;'>${exp}</sup>`
+  fup3.textContent = `${yUnits}`
+  fdn3.innerHTML = `${xUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`
+  
 }
 
 function reset() {
@@ -396,12 +408,19 @@ function reset() {
   document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
   document.getElementById("myRange").value = 0;
   myChartJS.update();
-  
-
-
   chartData(data);
   myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
   document.getElementById("myRange").max = (1 + Math.random()) * preLineMax;
+  const fup3 = document.querySelector('#fup3');
+  const fdn3 = document.querySelector('#fdn3');
+  const yvar = document.querySelector('#trendline-equation-y-3');
+  const xvar = document.querySelector('#trendline-equation-x-3');
+  const slope3 = document.querySelector('#trendline-equation-slope-3');
+  yvar.textContent = ``
+  xvar.innerHTML = ``
+  fup3.textContent = ``
+  fdn3.textContent = ``
+  slope3.textContent = ``
 }
 
 function showModal(){
