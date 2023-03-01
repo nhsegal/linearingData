@@ -374,9 +374,15 @@ function generateIdeal() {
   const slope3 = document.querySelector('#trendline-equation-slope-3');
   yvar.textContent = `${ySymbol} = (`
   slope3.textContent = `${coeff}`
+  if (exp!=1){
   xvar.innerHTML = `) ${xSymbol}<sup style= 'font-size: 0.75rem;'>${exp}</sup>`
+   fdn3.innerHTML = `${xUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`
+  }
+  else {
+      xvar.innerHTML = `) ${xSymbol}`
+      fdn3.innerHTML = `${xUnits}`
+  }
   fup3.textContent = `${yUnits}`
-  fdn3.innerHTML = `${xUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`
   
 }
 

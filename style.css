@@ -255,5 +255,8 @@ ul {
 
 #trendline-equation-x-3, #trendline-equation-y-3, #trendline-equation-slope-3{
   font-size: 1.5rem;
+  font-family: 'Times New Roman', Times, serif; 
 }
-
+#trendline-equation-slope-3{
+margin: 2px;
+}
