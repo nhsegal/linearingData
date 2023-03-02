@@ -5,124 +5,103 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
 </head>
 
 <body>
 
-<main>
-  <div class="left">  
-  
-            <h2>Trendline equation:</h2>
-            <div class="eq-label">Math Class Version</div>
-            <div class="trendline-container-math">
-              <div class="trendline" id= "trendline-equation-y-math">
-              </div>
-              <div  class="trendline" id = "trendline-equation-slope-math">
-              </div>
-              <div class="trendline" id = "trendline-equation-x-math">
-              </div>
-            </div>
-            <div class="eq-label">Physics Class Version</div>
-            <div class="trendline-container-physics">
-              <div class="trendline" id= "trendline-equation-y">
-              </div>
-              <div  class="trendline" id = "trendline-equation-slope">
-              </div>
-              <div class="fraction trendline" id="slope-units">
-                <span class="fup" id="fup"></span>
-                <span class="bar">/</span>
-                <span class="fdn" id="fdn"></span>
-              </div>
-              
-              <div class="trendline" id = "trendline-equation-x">
-              </div>
-            </div>
-           
-            
-        
+  <main>
+    <div class="left">
+    </div>
+    <div class="center">
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="trendline-container-fitted">
+        <div class="trendline" id="trendline-equation-y-3">
         </div>
-        <div class="center">
-          <div class="chart-container">
-            <canvas id="myChart"></canvas>
-          </div>
-          <div class="trendline-container-fitted">
-            <div class="trendline" id= "trendline-equation-y-3">
-            </div>
-            <div  class="trendline" id = "trendline-equation-slope-3">
-            </div>
-            <div class="fraction trendline" id="slope-units-3">
-              <span class="fup" id="fup3"></span>
-              <span class="bar">/</span>
-              <span class="fdn" id="fdn3"></span>
-            </div>
-            <div class="trendline" id = "trendline-equation-x-3">
-            </div>
-            </div>
+        <div class="trendline" id="trendline-equation-slope-3">
         </div>
-        <div class="right">
-          <h2>Plot a curve:</h2>
-          <div> Once you have transformed and fit your data, type in the coefficient and exponent that best describe the relationship:</div>
-          <br>
-            <div id = "eq">
-              <div id = 'dep-var'>Dep. Var.</div> = (<input type="text" id="coefficient"> 
-              <div class="fraction trendline" id="slope-units-2">
-                <span class="fup" id="fup-2"></span>
-                <span class="bar">/</span>
-                <span class="fdn" id="fdn-2"></span>
-              </div>
-              )<div id = indep-var>[Indep. Var.]</div><sup><input type="text" id="exp" style= "width: 3em;"></sup></div>
-          <br>
-          <button type="button" id="submit"  onclick="generateIdeal()">Submit</button>
-            <div id = 'error'></div>
-           
-        
-          
+        <div class="fraction trendline" id="slope-units-3">
+          <span class="fup" id="fup3"></span>
+          <span class="bar">/</span>
+          <span class="fdn" id="fdn3"></span>
         </div>
-    
-</main>
- 
+        <div class="trendline" id="trendline-equation-x-3">
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <h2>Plot a curve:</h2>
+      <div> Once you have transformed and fit your data, type in the coefficient and exponent that best describe the
+        relationship:</div>
+      <br>
+      <div id="eq">
+        <div id='dep-var'>Dep. Var.</div> = (<input type="text" id="coefficient">
+        <div class="fraction trendline" id="slope-units-2">
+          <span class="fup" id="fup-2"></span>
+          <span class="bar">/</span>
+          <span class="fdn" id="fdn-2"></span>
+        </div>
+        )<div id=indep-var>[Indep. Var.]</div><sup><input type="text" id="exp" style="width: 3em;"></sup>
+      </div>
+      <br>
+      <button type="button" id="submit" onclick="generateIdeal()">Submit</button>
+      <div id='error'></div>
 
 
-<div id="modal">
-  <div class="modal-content">
-<span id="close" class="close">&times;</span>
-<h2>What is this?</h2>
-This website presents you with a set of data where there is a nonlinear relationship 
-between the dependent and independent variables. You can alter how the data is plotted 
-to reveal this relationship. The point is to familarize you with a
-particular data analysis technique: plotting a variable vs. a function of another variable 
-in order to create a linear plot. 
-<br><br>
-The graph initially displays a set of data where the dependent variable is plotted against 
-the independent variable. Two variables are related by some power law. (<i>i.e.</i> 
-They fit the equation <i>y=Ax<sup>B</sup></i>.) The data also has a little bit of noise in it. 
-Notice how the plot changes when you select different horizontal axes for the same dataset. 
-One plot should be nearly linear, and you can determine the equation of the line of best fit. 
-This equation also yields the power law that describes the relationship between the independent 
-and dependent variables. One can confirm this after fitting the equation by transforming the horizontal
-x-axis.
 
-<h2>What's up with the units of the slope?</h2>
-An equation that related different measurements only makes sense if the numerical quantities in it have units.
-The coefficient in front the independent variable must also have units. This sim unfortunately 
-does not always display the coefficient's combination of units in the most simplified form, but the upside of this
-is that the user can see that how the units relate to the units of the quantities on each axis.
+    </div>
 
-<h2>Why not fit the raw data with a curve instead of transforming the data to linearize it?</h2>
-There are advantages to both methods. One advantage of linearizing is that it helps one spot outliers and 
-systematic deviations from the model. Another advantage is that it requires less technology than nonlinear curve-fitting. 
-However, the main reason I believe linearing data should continue to be taught is that it improves students' 
-understanding of proportionality, variation, and the meaning of power laws. Interpreting the slope of these graphs
-is a worthwhile exercise. 
+  </main>
 
-<h2>Do the different datasets refer to specifc experiments?</h2>
-The data is randomally generated, but the choice of variables relates to specific experiments. One involves measuring the 
-side length and mass of a series of similiar triangles cut from a uniform sheet of material; one involves measuring the width and height
-of a series of paragraphs which display the same content; and one involves measuring the intensity of light from a small bulb at
-various distances.
 
-</div>
+
+  <div id="modal">
+    <div class="modal-content">
+      <span id="close" class="close">&times;</span>
+      <h2>What is this?</h2>
+      This website presents you with a set of data where there is a nonlinear relationship
+      between the dependent and independent variables. You can alter how the data is plotted
+      to reveal this relationship. The point is to familarize you with a
+      particular data analysis technique: plotting a variable vs. a function of another variable
+      in order to create a linear plot.
+      <br><br>
+      The graph initially displays a set of data where the dependent variable is plotted against
+      the independent variable. Two variables are related by some power law. (<i>i.e.</i>
+      They fit the equation <i>y=Ax<sup>B</sup></i>.) The data also has a little bit of noise in it.
+      Notice how the plot changes when you select different horizontal axes for the same dataset.
+      One plot should be nearly linear, and you can determine the equation of the line of best fit.
+      This equation also yields the power law that describes the relationship between the independent
+      and dependent variables. One can confirm this after fitting the equation by transforming the horizontal
+      x-axis.
+
+      <h2>What's up with the units of the slope?</h2>
+      An equation that related different measurements only makes sense if the numerical quantities in it have units.
+      The coefficient in front the independent variable must also have units. This sim unfortunately
+      does not always display the coefficient's combination of units in the most simplified form, but the upside of this
+      is that the user can see that how the units relate to the units of the quantities on each axis.
+
+      <h2>Why not fit the raw data with a curve instead of transforming the data to linearize it?</h2>
+      There are advantages to both methods. One advantage of linearizing is that it helps one spot outliers and
+      systematic deviations from the model. Another advantage is that it requires less technology than nonlinear
+      curve-fitting.
+      However, the main reason I believe linearing data should continue to be taught is that it improves students'
+      understanding of proportionality, variation, and the meaning of power laws. Interpreting the slope of these graphs
+      is a worthwhile exercise.
+
+      <h2>Do the different datasets refer to specifc experiments?</h2>
+      The data is randomally generated, but the choice of variables relates to specific experiments. One involves
+      measuring the
+      side length and mass of a series of similiar triangles cut from a uniform sheet of material; one involves
+      measuring the width and height
+      of a series of paragraphs which display the same content; and one involves measuring the intensity of light from a
+      small bulb at
+      various distances.
+
+    </div>
 
 
 
@@ -130,11 +109,11 @@ various distances.
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
 <!--
 <script language="javascript" type="text/javascript" src="sketch.js"></script>
 -->
 
 
 </html>
-

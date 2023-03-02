@@ -1,3 +1,5 @@
+import Chart from 'chart.js/auto';
+
 const numberOfDatapoints = 12;
 let rawData = [];
 let coefficient = 10 + Math.random() * 5;
@@ -202,7 +204,6 @@ function chartData(dataToPlot) {
   });
 }
 
-
 window.addEventListener('DOMContentLoaded', () => {
   pickExponent();
   alterHTML(exponent);
@@ -256,7 +257,6 @@ while (x--) {
           prevExp = -2;
         }
       }
-
 
       if (fitExponent != 1) {
         document.getElementById('fdn-2').innerHTML = `${xUnits}${fitExponent.sup()}`;
@@ -394,4 +394,3 @@ function reset() {
   fdn3.textContent = '';
   slope3.textContent = '';
 }
-

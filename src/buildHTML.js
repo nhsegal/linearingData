@@ -4,7 +4,6 @@ const body = document.querySelector('body');
 const makeHeader = () => {
   const mainHeading = document.createElement('h1');
   mainHeading.textContent = 'Fit the Data';
-
   const modalButton = document.createElement('button');
   const modal = document.querySelector('#modal');
   modalButton.id = 'modal-button';
@@ -17,7 +16,7 @@ const makeHeader = () => {
   };
 
   body.prepend(mainHeading);
-  body.append(modalButton);
+  body.prepend(modalButton);
 };
 
 const makeHorizontalAxesControls = () => {
@@ -72,7 +71,7 @@ const makeHorizontalAxesControls = () => {
     invSqdDataOption,
     invSqdDataOptionLabel,
   );
-}
+};
 
 const makeSlopeSlider = () => {
   const header = document.createElement('h2');
@@ -88,10 +87,80 @@ const makeSlopeSlider = () => {
   slopeSlider.classList.add('slider');
   slopeSlider.oninput = 'sliderFunction()';
 
-  left.append(header, slopeSlider)
-}
+  left.append(header, slopeSlider);
+};
 
+const renderUnitsFraction = (top, bot, ctn) => {
+  ctn.classList.add('fraction');
+  const fup = document.createElement('span');
+  fup.id = 'fup';
+  fup.classList.add('fup');
+  fup.innerHTML = top;
+  const fdn = document.createElement('span');
+  fdn.id = 'fdn';
+  fdn.classList.add('fdn');
+  fdn.innerHTML = bot;
+  ctn.append(fup, fdn);
+  return ctn;
+};
 
+const renderTrendlineEquation = () => {
+  const header = document.createElement('h2');
+  header.textContent = 'Trendline equation:';
+  const mathVersionLabel = document.createElement('div');
+  mathVersionLabel.classList.add('eq-label');
+  mathVersionLabel.textContent = 'Math Class Version';
+  const mathVersionCtn = document.createElement('div');
+  mathVersionCtn.classList.add('trendline-container-math');
+  const mathTrendlineY = document.createElement('div');
+  mathTrendlineY.classList.add('trendline');
+  mathTrendlineY.id = 'trendline-equation-y-math';
+  mathTrendlineY.textContent = 'y=';
+
+  const mathTrendlineSlope = document.createElement('div');
+  mathTrendlineSlope.classList.add('trendline');
+  mathTrendlineSlope.id = 'trendline-equation-slope-math';
+  mathTrendlineSlope.textContent = '8';
+
+  const mathTrendlineX = document.createElement('div');
+  mathTrendlineX.classList.add('trendline');
+  mathTrendlineX.id = 'trendline-equation-x-math';
+  mathTrendlineX.textContent = 'x';
+  mathVersionCtn.append(mathTrendlineY, mathTrendlineSlope, mathTrendlineX);
+
+  left.append(header, mathVersionLabel, mathVersionCtn);
+
+  const physicsVersionLabel = document.createElement('div');
+  physicsVersionLabel.classList.add('eq-label');
+  physicsVersionLabel.textContent = 'Physics Class Version';
+  const physicsVersionCtn = document.createElement('div');
+  physicsVersionCtn.classList.add('trendline-container-physics');
+  const physicsTrendlineY = document.createElement('div');
+  physicsTrendlineY.classList.add('trendline');
+  physicsTrendlineY.id = 'trendline-equation-y-physics';
+  physicsTrendlineY.textContent = 'y=';
+
+  const physicsTrendlineSlope = document.createElement('div');
+  physicsTrendlineSlope.classList.add('trendline');
+  physicsTrendlineSlope.id = 'trendline-equation-slope-physics';
+  physicsTrendlineSlope.textContent = '8';
+
+  const physicsTrendlineSlopeUnits = document.createElement('div');
+  physicsTrendlineSlopeUnits.classList.add('trendline');
+
+  const physicsTrendlineX = document.createElement('div');
+  physicsTrendlineX.classList.add('trendline');
+  physicsTrendlineX.id = 'trendline-equation-x-math';
+  physicsTrendlineX.textContent = 'x';
+  physicsVersionCtn.append(
+    physicsTrendlineY,
+    renderUnitsFraction('kg', 'd<sup>2</sup>', physicsTrendlineSlopeUnits),
+    physicsTrendlineSlope,
+    physicsTrendlineX,
+  );
+
+  left.append(physicsVersionLabel, physicsVersionCtn);
+};
 
 const makeLeftside = (resetFn) => {
   const newDatasetButton = document.createElement('button');
@@ -102,6 +171,7 @@ const makeLeftside = (resetFn) => {
   left.append(newDatasetButton);
   makeHorizontalAxesControls();
   makeSlopeSlider();
+  renderTrendlineEquation();
 };
 
 export { makeHeader, makeLeftside };
