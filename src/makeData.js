@@ -1,15 +1,26 @@
-const makeData = (N, noise, coefficient, exponent, dataObject) => {
+const makeData = (N, noise, coefficient, exponent) => {
+  const dataObject = {
+    rawData: [],
+    sqData: [],
+    invData: [],
+    invSqData: [],
+  };
   for (let i = 0; i < N; i += 1) {
-    let xx = (10 * (1 + i)) / N + noise
-      * (Math.round(Math.random() * 10) / 10 - 0.5);
+    let xx = (10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5);
     while (xx <= 0) {
-      xx = (10 * (1 + i)) / N + noise
-      * (Math.round(Math.random() * 10) / 10 - 0.5);
+      xx = (10 * (1 + i)) / N
+        + noise * (Math.round(Math.random() * 10) / 10 - 0.5);
     }
-    const yy = Math.round(100
-      * (coefficient * (xx + (1 + 0.5 * exponent)
-      * (4 / (i + 4)) * noise * (Math.round(Math.random() * 10)
-      / 10 - 0.5)) ** exponent)) / 100;
+    const yy = Math.round(
+      100
+          * (coefficient
+            * (xx
+              + (1 + 0.5 * exponent)
+                * (4 / (i + 4))
+                * noise
+                * (Math.round(Math.random() * 10) / 10 - 0.5))
+              ** exponent),
+    ) / 100;
 
     dataObject.rawData.push({
       x: Math.round(100 * xx) / 100,
@@ -28,6 +39,7 @@ const makeData = (N, noise, coefficient, exponent, dataObject) => {
       y: Math.round(yy * 100) / 100,
     });
   }
+  return dataObject;
 };
 
 export default makeData;

@@ -7,7 +7,7 @@ const alterHTML = (exp, dataObject) => {
   const depVar = document.querySelector('#dep-var');
   const fup2 = document.querySelector('#fup-2');
   const fdn2 = document.querySelector('#fdn-2');
-
+/*
   switch (exp) {
     case 2:
       dataObject.xName = 'Side Length';
@@ -17,15 +17,7 @@ const alterHTML = (exp, dataObject) => {
       dataObject.xUnits = 'cm';
       dataObject.yUnits = 'g';
       dataObject.title = 'Shape';
-      /*
-      dataObject.xName = 'Impact Speed';
-      dataObject.xSymbol = '\u{1D459}'; // Change
-      dataObject.yName = 'Depth';
-      dataObject.ySymbol = '\u{1D45a}'; // Change
-      dataObject.xUnits = 'm/s';
-      dataObject.yUnits = 'mm';
-      dataObject.title = 'Penetration';
-      */
+
       break;
     case -1:
       dataObject.xName = 'Length';
@@ -36,7 +28,6 @@ const alterHTML = (exp, dataObject) => {
       dataObject.yUnits = 'cm';
       dataObject.title = 'Paragraph';
 
-      /*
       dataObject.xName = 'Pressure';
       dataObject.xSymbol = '\u{1D459}'; // change
       dataObject.yName = 'Volume';
@@ -44,7 +35,7 @@ const alterHTML = (exp, dataObject) => {
       dataObject.xUnits = 'kPa';
       dataObject.yUnits = 'mL';
       dataObject.title = 'Gas';
-    */
+
       break;
     case -2:
       dataObject.xName = 'Distance';
@@ -63,7 +54,7 @@ const alterHTML = (exp, dataObject) => {
       dataObject.xUnits = 'cm';
       dataObject.yUnits = 'cm';
       dataObject.title = 'Equal Volume Cups';
-*/
+
       break;
     default:
       console.log('error?');
@@ -76,6 +67,7 @@ const alterHTML = (exp, dataObject) => {
   depVar.textContent = `${dataObject.ySymbol}`;
   fup2.textContent = `${dataObject.yUnits}`;
   fdn2.textContent = `${dataObject.xUnits}`;
+  */
 };
 
 export default alterHTML;

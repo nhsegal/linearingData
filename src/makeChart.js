@@ -1,16 +1,22 @@
 import Chart from 'chart.js/auto';
 
-const makeChart = (
-  dataToPlot,
-  trendlineSlope,
-  yName,
-  ySymbol,
-  yUnits,
-  xName,
-  xUnits,
-  xSymbol,
-  title,
-) => {
+const makeChart = (experiment, dataObject, option) => {
+  /*
+    \u{00B2}`;
+  invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+  invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+    */
+  const xLabel = experiment.indepVar;
+  const xUnits = experiment.indepVarUnits;
+  if (option === 2) {
+    xLabel = `${experiment.indepVar}\u{00B2}`;
+    /*
+    \u{00B2}`;
+  invDat.textContent = `${xName}\u{207B}\u{00B9}`;
+  invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
+    */
+  }
+
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChartJS = new Chart(ctx, {
     type: 'line',
@@ -19,7 +25,7 @@ const makeChart = (
         {
           label: 'Sample Data Set',
           type: 'scatter',
-          data: dataToPlot,
+          data: dataObject.rawData,
           showLine: false,
           fill: false,
           borderColor: 'rgba(255, 99, 132, 1)',
@@ -28,16 +34,17 @@ const makeChart = (
         },
       ],
     },
+
     options: {
       aspectRatio: 1,
       plugins: {
         title: {
           display: true,
-          text: 'Chart Title',
+          text: `${experiment.title} ${experiment.depVar} vs. ${experiment.indepVar}`,
         },
-      },
-      legend: {
-        display: false,
+        legend: {
+          display: false,
+        },
       },
       annotation: {
         annotations: [
@@ -46,7 +53,7 @@ const makeChart = (
             mode: 'horizontal',
             scaleID: 'y-axis-0',
             value: 0,
-            endValue: trendlineSlope,
+            endValue: 10, // trendlineSlope,
             borderColor: 'rgb(75, 192, 192)',
             borderWidth: 4,
           },
@@ -60,12 +67,23 @@ const makeChart = (
       },
       responsive: true,
       maintainAspectRatio: true,
+
       scales: {
+        x: {
+          type: 'linear',
+        },
+        y: {
+          type: 'linear',
+        },
+      },
+      /*
+      {
+
         yAxes: [
           {
             scaleLabel: {
               display: true,
-              labelString: `${yName} ${ySymbol} (${yUnits})`,
+              labelString: `${experiment.depVar} ${experiment.depVarSymbol} (${experiment.depVarUnits})`,
               fontSize: 16,
             },
             ticks: {
@@ -74,6 +92,7 @@ const makeChart = (
             },
             afterSetDimensions(axes) {
             //  preLineMax = axes.max;
+            // What do to here?
             },
           },
         ],
@@ -83,7 +102,7 @@ const makeChart = (
             display: true,
             scaleLabel: {
               display: true,
-              labelString: `${xName} ${xSymbol} (${xUnits})`,
+              labelString: `${experiment.indepVar} ${experiment.indepVarSymbol} (${experiment.indepVarUnits})<sup>${option}</sup>`,
               fontSize: 16,
             },
             ticks: {
@@ -96,8 +115,10 @@ const makeChart = (
           },
         ],
       },
+*/
     },
   });
+  return myChartJS;
 };
 
 export default makeChart;
