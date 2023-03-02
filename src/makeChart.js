@@ -9,6 +9,7 @@ const makeChart = (
   xName,
   xUnits,
   xSymbol,
+  title,
 ) => {
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChartJS = new Chart(ctx, {
@@ -29,6 +30,12 @@ const makeChart = (
     },
     options: {
       aspectRatio: 1,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Chart Title',
+        },
+      },
       legend: {
         display: false,
       },

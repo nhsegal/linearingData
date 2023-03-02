@@ -11,6 +11,12 @@ const dataObject = {
   sqData: [],
   invData: [],
   invSqData: [],
+  xName: '',
+  xSymbol: '',
+  xUnits: '',
+  yName: '',
+  ySymbol: '',
+  yUnits: '',
 };
 
 const coefficient = 10 + Math.random() * 5;
@@ -25,21 +31,15 @@ const preLineMax = 0;
 let xMax;
 let prevExp;
 
-let xName;
-let xSymbol;
-let xUnits;
-let yName;
-let ySymbol;
-let yUnits;
-
 makeHeader();
 makeLeftside();
 makeChart();
+alterHTML(exponent);
+makeData(N, noise, coefficient, exponent, dataObject);
+makeChart(dataObject.rawData);
+myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
+document.getElementById('slope-slider').max = (1 + Math.random()) * preLineMax;
 
-window.addEventListener('DOMContentLoaded', () => {
-  alterHTML(exponent);
-  makeData(N, noise, coefficient, exponent, dataObject);
-  makeChart(dataObject.rawData);
-  myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
-  document.getElementById('slope-slider').max = (1 + Math.random()) * preLineMax;
-});
+// window.addEventListener('DOMContentLoaded', () => {
+
+// });
