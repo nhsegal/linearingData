@@ -19,6 +19,17 @@ const makeHeader = () => {
   body.prepend(modalButton);
 };
 
+/*
+const addELsToAxesControls = (chart) => {
+  const axisChoices = document.querySelectorAll('input[type=radio]');
+  axisChoices.forEach((choice) => {
+    choice.addEventListener('change', (e) => {
+      console.log(e.target.value);
+      axisChange(chart);
+    });
+  });
+};
+*/
 const makeHorizontalAxesControls = () => {
   const header = document.createElement('h2');
   header.textContent = 'Select the horizontal axes:';
@@ -54,7 +65,7 @@ const makeHorizontalAxesControls = () => {
   const invSqdDataOption = document.createElement('input');
   invSqdDataOption.type = 'radio';
   invSqdDataOption.name = 'x-axis';
-  invSqdDataOption.value = -1;
+  invSqdDataOption.value = -2;
   invSqdDataOption.id = 'invsqd-data-option';
   const invSqdDataOptionLabel = document.createElement('label');
   invSqdDataOptionLabel.for = 'invsqd-data-option';
@@ -71,6 +82,7 @@ const makeHorizontalAxesControls = () => {
     invSqdDataOption,
     invSqdDataOptionLabel,
   );
+  // addELsToAxesControls(chart);
 };
 
 const sliderFunction = (e) => {
@@ -109,21 +121,6 @@ const makeSlopeSlider = () => {
   slopeSlider.classList.add('slider');
   slopeSlider.addEventListener('change', sliderFunction);
   left.appendChild(slopeSlider);
-};
-
-const axisChange = () => {
-  console.log(this.value);
-
-  myChartJS.update();
-};
-
-const addELsToAxesControls = (c) => {
-  const axisChoices = document.querySelectorAll('input[type=radio]');
-  const x = inputs.length;
-  const chart = c;
-  for (const choice of axisChoices) {
-    choice.addEventListener('change', (chart) => { axisChange(chart); });
-  }
 };
 
 const renderUnitsFraction = (top, bot, ctn) => {
