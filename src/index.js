@@ -36,3 +36,31 @@ document.querySelector('label[for="raw_data_option"]').innerHTML = ` ${currentEx
 document.querySelector('label[for="sqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{00B2} <br>`;
 document.querySelector('label[for="inv_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B9} <br>`;
 document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B2} <br>`;
+
+const sliderFunction = () => {
+  const val = document.getElementById('slope_slider').value;
+
+  myChart.update();
+  // document.getElementById('trendline-equation-slope-math').textContent
+  //= Number.parseFloat(val / xMax).toFixed(2);
+  // document.getElementById('trendline-equation-x-math').textContent = 'x';
+  // document.getElementById('trendline-equation-y').textContent = `${ySymbol} = (`;
+  // document.getElementById('trendline-equation-slope').textContent
+  //= Number.parseFloat(val / xMax).toFixed(2);
+  // document.getElementById('trendline-equation-y-math').textContent = 'y = ';
+  // document.getElementById('fup').textContent = yUnits;
+  /*
+  if (fitExponent != 1) {
+    document.getElementById(
+      'trendline-equation-x',
+    ).innerHTML = `) ${xSymbol}<sup>${fitExponent}</sup>`;
+    document.getElementById('fdn').innerHTML = `${xUnits}${fitExponent.sup()}`;
+  } else {
+    document.getElementById('trendline-equation-x').innerHTML = `) ${xSymbol}`;
+    document.getElementById('fdn').innerHTML = `${xUnits}`;
+  }
+  */
+};
+
+const slopeSlider = document.querySelector('#slope_slider');
+slopeSlider.addEventListener('change', sliderFunction);

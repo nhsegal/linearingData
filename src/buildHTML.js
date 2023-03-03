@@ -86,28 +86,6 @@ const makeHorizontalAxesControls = () => {
   // addELsToAxesControls(chart);
 };
 
-const sliderFunction = (e) => {
-  const val = e.target.value;
-  // myChartJS.options.annotation.annotations[0].endValue = val;
-  // myChartJS.update();
-
-  console.log(val);
-/*
-
-  document.getElementById('fup').textContent = yUnits;
-
-  if (fitExponent != 1) {
-    document.getElementById(
-      'trendline-equation-x',
-    ).innerHTML = `) ${xSymbol}<sup>${fitExponent}</sup>`;
-    document.getElementById('fdn').innerHTML = `${xUnits}${fitExponent.sup()}`;
-  } else {
-    document.getElementById('trendline-equation-x').innerHTML = `) ${xSymbol}`;
-    document.getElementById('fdn').innerHTML = `${xUnits}`;
-  }
-  */
-};
-
 const makeSlopeSlider = () => {
   const header = document.createElement('h2');
   header.textContent = 'Adjust the slope of the trendline:';
@@ -120,7 +98,6 @@ const makeSlopeSlider = () => {
   slopeSlider.defaultValue = 0;
   slopeSlider.step = 0.001;
   slopeSlider.classList.add('slider');
-  slopeSlider.addEventListener('change', sliderFunction);
   left.appendChild(slopeSlider);
 };
 

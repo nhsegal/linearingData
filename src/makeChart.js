@@ -1,4 +1,7 @@
 import Chart from 'chart.js/auto';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+Chart.register(annotationPlugin);
 
 const makeChart = (experiment, dataObject, option) => {
   let xLabel = experiment.indepVar;
@@ -43,13 +46,13 @@ const makeChart = (experiment, dataObject, option) => {
     data: {
       datasets: [
         {
-          label: 'Sample Data Set',
+          label: 'Data Set',
           type: 'scatter',
           data: dataToPlot,
           showLine: false,
           fill: false,
-          borderColor: 'rgba(255, 99, 132, 1)',
-          backgroundColor: 'rgba(255, 99, 132, 1)',
+          borderColor: 'rgba(245, 99, 80, 1)',
+          backgroundColor: 'rgba(235, 99, 132, 1)',
           borderWidth: 1,
         },
       ],
@@ -68,20 +71,35 @@ const makeChart = (experiment, dataObject, option) => {
         legend: {
           display: false,
         },
-      },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            mode: 'horizontal',
-            scaleID: 'y-axis-0',
-            value: 0,
-            endValue: 10, // trendlineSlope,
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 4,
+        annotation: {
+          annotations: {
+            line1: {
+              type: 'line',
+              xMin: 0,
+              yMin: 0,
+
+              borderColor: 'rgb(55, 139, 132)',
+              borderWidth: 2,
+            },
           },
-        ],
+        },
+        /*
+        annotation: {
+          annotations: [
+            {
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 0,
+              endValue: 10, // trendlineSlope,
+              borderColor: 'rgb(75, 192, 192)',
+              borderWidth: 4,
+            },
+          ],
+        },
+        */
       },
+
       layout: {
         padding: {
           right: 30,
@@ -148,6 +166,7 @@ const makeChart = (experiment, dataObject, option) => {
 */
     },
   });
+  console.log(myChartJS.options.plugins.annotation.annotations);
   return myChartJS;
 };
 
