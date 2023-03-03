@@ -47,9 +47,11 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${curren
 // add eventlistener to slider
 const sliderFunction = () => {
   const val = document.getElementById('slope_slider').value;
+  myChart.options.plugins.annotation.annotations.line1.endValue = val;
   console.log(val);
-  myChart
-    .myChart.update();
+
+  // console.log({ slope });
+  myChart.update();
   // document.getElementById('trendline-equation-slope-math').textContent
   //= Number.parseFloat(val / xMax).toFixed(2);
   // document.getElementById('trendline-equation-x-math').textContent = 'x';

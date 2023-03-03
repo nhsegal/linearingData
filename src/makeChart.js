@@ -75,7 +75,9 @@ const makeChart = (experiment, dataObject, option) => {
           annotations: {
             line1: {
               type: 'line',
-
+              scaleID: 'y',
+              value: 0,
+              endValue: 1,
               // xMin: 0,
               // yMin: 0,
               borderColor: 'rgb(55, 139, 132)',
