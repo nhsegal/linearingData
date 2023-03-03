@@ -18,13 +18,13 @@ const pickExperiment = () => {
       experiment.exponent = 2;
       experiment.indepVar = 'Impact Speed';
       experiment.indepVarSymbol = 'v';
-      experiment.indepVarUnits = '<sup>m</sup>/<sub>s</sub>';
+      experiment.indepVarUnits = 'm/s';
       experiment.depVar = 'Depth';
       experiment.depVarSymbol = 'd';
       experiment.depVarUnits = 'mm';
       experiment.indepVarRange = 6;
       experiment.coefficientRange = 0.9;
-      experiment.title = 'Falling Ball';
+      experiment.title = 'Crater';
       break;
     case 3:
       experiment.exponent = -1;
@@ -57,7 +57,7 @@ const pickExperiment = () => {
       experiment.indepVarUnits = 'm';
       experiment.depVar = 'Intensity';
       experiment.depVarSymbol = 'I';
-      experiment.depVarUnits = 'W/m<sup>2</sup>';
+      experiment.depVarUnits = 'W/m\u{00B2}';
       experiment.indepVarRange = 4;
       experiment.coefficientRange = 3;
       experiment.title = 'Light';

@@ -1,20 +1,40 @@
 import Chart from 'chart.js/auto';
 
 const makeChart = (experiment, dataObject, option) => {
-  /*
-    \u{00B2}`;
-  invDat.textContent = `${xName}\u{207B}\u{00B9}`;
-  invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
-    */
-  const xLabel = experiment.indepVar;
-  const xUnits = experiment.indepVarUnits;
+  let xLabel = experiment.indepVar;
+  let xUnits = experiment.indepVarUnits;
+  let dataToPlot;
+
+  if (option === 1) {
+    dataToPlot = dataObject.rawData;
+  }
   if (option === 2) {
+    dataToPlot = dataObject.sqData;
     xLabel = `${experiment.indepVar}\u{00B2}`;
-    /*
-    \u{00B2}`;
-  invDat.textContent = `${xName}\u{207B}\u{00B9}`;
-  invSqDat.textContent = `${xName}\u{207B}\u{00B2}`;
-    */
+    const xUnitsFrac = xUnits.split('/');
+    if (xUnitsFrac.length > 1) {
+      xUnits = `${xUnits[0]}\u{00B2}/${xUnits[2]}\u{00B2}`;
+    } else {
+      xUnits = `${experiment.indepVarUnits}\u{00B2}`;
+    }
+  } else if (option === -1) {
+    dataToPlot = dataObject.invData;
+    xLabel = `${experiment.indepVar}\u{207B}\u{00B9}`;
+    const xUnitsFrac = xUnits.split('/');
+    if (xUnitsFrac.length > 1) {
+      xUnits = `${xUnits[0]}\u{207B}\u{00B9}/${xUnits[2]}\u{207B}\u{00B9}`;
+    } else {
+      xUnits = `${experiment.indepVarUnits}\u{207B}\u{00B9}`;
+    }
+  } else if (option === -2) {
+    dataToPlot = dataObject.invSqData;
+    xLabel = `${experiment.indepVar}\u{207B}\u{00B2}`;
+    const xUnitsFrac = xUnits.split('/');
+    if (xUnitsFrac.length > 1) {
+      xUnits = `${xUnits[0]}\u{207B}\u{00B2}/${xUnits[2]}\u{207B}\u{00B2}`;
+    } else {
+      xUnits = `${experiment.indepVarUnits}\u{207B}\u{00B2}`;
+    }
   }
 
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -25,7 +45,7 @@ const makeChart = (experiment, dataObject, option) => {
         {
           label: 'Sample Data Set',
           type: 'scatter',
-          data: dataObject.rawData,
+          data: dataToPlot,
           showLine: false,
           fill: false,
           borderColor: 'rgba(255, 99, 132, 1)',
@@ -40,7 +60,10 @@ const makeChart = (experiment, dataObject, option) => {
       plugins: {
         title: {
           display: true,
-          text: `${experiment.title} ${experiment.depVar} vs. ${experiment.indepVar}`,
+          text: `${experiment.title} ${experiment.depVar} vs. ${xLabel}`,
+          font: {
+            size: 20,
+          },
         },
         legend: {
           display: false,
@@ -71,21 +94,32 @@ const makeChart = (experiment, dataObject, option) => {
       scales: {
         x: {
           type: 'linear',
+          title: {
+            display: true,
+            text: `${xLabel} (${xUnits})`,
+            font: {
+              size: 16,
+            },
+          },
         },
         y: {
           type: 'linear',
+          title: {
+            display: true,
+            text: `${experiment.depVar} (${experiment.depVarUnits})`,
+            font: {
+              size: 16,
+            },
+          },
         },
       },
       /*
+
       {
 
         yAxes: [
           {
-            scaleLabel: {
-              display: true,
-              labelString: `${experiment.depVar} ${experiment.depVarSymbol} (${experiment.depVarUnits})`,
-              fontSize: 16,
-            },
+
             ticks: {
               beginAtZero: true,
               fontSize: 16,
@@ -100,11 +134,7 @@ const makeChart = (experiment, dataObject, option) => {
           {
             type: 'linear', // MANDATORY TO SHOW YOUR POINTS! (THIS IS THE IMPORTANT BIT)
             display: true,
-            scaleLabel: {
-              display: true,
-              labelString: `${experiment.indepVar} ${experiment.indepVarSymbol} (${experiment.indepVarUnits})<sup>${option}</sup>`,
-              fontSize: 16,
-            },
+
             ticks: {
               beginAtZero: true,
               fontSize: 16,

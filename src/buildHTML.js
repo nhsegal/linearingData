@@ -73,21 +73,57 @@ const makeHorizontalAxesControls = () => {
   );
 };
 
+const sliderFunction = (e) => {
+  const val = e.target.value;
+  // myChartJS.options.annotation.annotations[0].endValue = val;
+  // myChartJS.update();
+
+  console.log(val);
+/*
+
+  document.getElementById('fup').textContent = yUnits;
+
+  if (fitExponent != 1) {
+    document.getElementById(
+      'trendline-equation-x',
+    ).innerHTML = `) ${xSymbol}<sup>${fitExponent}</sup>`;
+    document.getElementById('fdn').innerHTML = `${xUnits}${fitExponent.sup()}`;
+  } else {
+    document.getElementById('trendline-equation-x').innerHTML = `) ${xSymbol}`;
+    document.getElementById('fdn').innerHTML = `${xUnits}`;
+  }
+  */
+};
+
 const makeSlopeSlider = () => {
   const header = document.createElement('h2');
   header.textContent = 'Adjust the slope of the trendline:';
-
+  left.append(header);
   const slopeSlider = document.createElement('input');
+  slopeSlider.id = 'slope_slider';
   slopeSlider.type = 'range';
-  slopeSlider.min = '0.05';
-  slopeSlider.max = '5';
-  slopeSlider.value = '0';
-  slopeSlider.step = '0.05';
-  slopeSlider.id = 'slope-slider';
+  slopeSlider.min = 0;
+  slopeSlider.max = 1;
+  slopeSlider.defaultValue = 0;
+  slopeSlider.step = 0.001;
   slopeSlider.classList.add('slider');
-  slopeSlider.oninput = 'sliderFunction()';
+  slopeSlider.addEventListener('change', sliderFunction);
+  left.appendChild(slopeSlider);
+};
 
-  left.append(header, slopeSlider);
+const axisChange = () => {
+  console.log(this.value);
+
+  myChartJS.update();
+};
+
+const addELsToAxesControls = (c) => {
+  const axisChoices = document.querySelectorAll('input[type=radio]');
+  const x = inputs.length;
+  const chart = c;
+  for (const choice of axisChoices) {
+    choice.addEventListener('change', (chart) => { axisChange(chart); });
+  }
 };
 
 const renderUnitsFraction = (top, bot, ctn) => {
@@ -162,14 +198,14 @@ const renderTrendlineEquation = () => {
   left.append(physicsVersionLabel, physicsVersionCtn);
 };
 
-const makeLeftside = (resetFn) => {
+const makeLeftside = (chart) => {
   const newDatasetButton = document.createElement('button');
   newDatasetButton.type = 'button';
   newDatasetButton.id = 'newDataSet';
   newDatasetButton.textContent = 'New Data Set';
-  newDatasetButton.onclick = resetFn;
+  // newDatasetButton.onclick = resetFn;
   left.append(newDatasetButton);
-  makeHorizontalAxesControls();
+  makeHorizontalAxesControls(chart);
   makeSlopeSlider();
   renderTrendlineEquation();
 };
