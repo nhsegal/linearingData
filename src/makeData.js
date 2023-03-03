@@ -1,4 +1,4 @@
-const makeData = (N, noise, coefficient, exponent) => {
+const makeData = (N, noise, coefficient, exponent, xMax) => {
   const dataObject = {
     rawData: [],
     sqData: [],
@@ -6,7 +6,8 @@ const makeData = (N, noise, coefficient, exponent) => {
     invSqData: [],
   };
   for (let i = 0; i < N; i += 1) {
-    let xx = (10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5);
+    let xx = (xMax / 10)
+    * ((10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
     while (xx <= 0) {
       xx = (10 * (1 + i)) / N
         + noise * (Math.round(Math.random() * 10) / 10 - 0.5);

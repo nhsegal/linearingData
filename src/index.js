@@ -9,12 +9,19 @@ const currentExperiment = pickExperiment(); // Object with exponent, labels, etc
 const coefficient = Math.round(100 * currentExperiment.coefficientRange
   - (50 * currentExperiment.coefficientRange) * Math.random()) / 100;
 const noise = 0.7;
-const currentDataObject = makeData(N, noise, coefficient, currentExperiment.exponent);
+const currentDataObject = makeData(
+  N,
+  noise,
+  coefficient,
+  currentExperiment.exponent,
+  currentExperiment.indepVarRange,
+);
 const myChart = makeChart(currentExperiment, currentDataObject, 1);
 
 makeHeader();
 makeLeftside(myChart);
 
+// add eventlisteners and text to radio button
 const axisChoices = document.querySelectorAll('input[type=radio]');
 axisChoices.forEach((choice) => {
   choice.addEventListener('change', (e) => {
@@ -37,11 +44,12 @@ document.querySelector('label[for="sqd_data_option"]').innerHTML = ` ${currentEx
 document.querySelector('label[for="inv_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B9} <br>`;
 document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B2} <br>`;
 
+// add eventlistener to slider
 const sliderFunction = () => {
   const val = document.getElementById('slope_slider').value;
   console.log(val);
-
-  myChart.update();
+  myChart
+    .myChart.update();
   // document.getElementById('trendline-equation-slope-math').textContent
   //= Number.parseFloat(val / xMax).toFixed(2);
   // document.getElementById('trendline-equation-x-math').textContent = 'x';
@@ -51,15 +59,7 @@ const sliderFunction = () => {
   // document.getElementById('trendline-equation-y-math').textContent = 'y = ';
   // document.getElementById('fup').textContent = yUnits;
   /*
-  if (fitExponent != 1) {
-    document.getElementById(
-      'trendline-equation-x',
-    ).innerHTML = `) ${xSymbol}<sup>${fitExponent}</sup>`;
-    document.getElementById('fdn').innerHTML = `${xUnits}${fitExponent.sup()}`;
-  } else {
-    document.getElementById('trendline-equation-x').innerHTML = `) ${xSymbol}`;
-    document.getElementById('fdn').innerHTML = `${xUnits}`;
-  }
+
   */
 };
 
