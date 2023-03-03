@@ -75,9 +75,9 @@ const makeChart = (experiment, dataObject, option) => {
           annotations: {
             line1: {
               type: 'line',
-              xMin: 0,
-              yMin: 0,
 
+              // xMin: 0,
+              // yMin: 0,
               borderColor: 'rgb(55, 139, 132)',
               borderWidth: 2,
             },
@@ -148,25 +148,11 @@ const makeChart = (experiment, dataObject, option) => {
             },
           },
         ],
-        xAxes: [
-          {
-            type: 'linear', // MANDATORY TO SHOW YOUR POINTS! (THIS IS THE IMPORTANT BIT)
-            display: true,
 
-            ticks: {
-              beginAtZero: true,
-              fontSize: 16,
-            },
-            afterSetDimensions(axes) {
-            //  xMax = axes.max;
-            },
-          },
-        ],
       },
 */
     },
   });
-  console.log(myChartJS.options.plugins.annotation.annotations);
   return myChartJS;
 };
 

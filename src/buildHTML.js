@@ -19,17 +19,6 @@ const makeHeader = () => {
   body.prepend(modalButton);
 };
 
-/*
-const addELsToAxesControls = (chart) => {
-  const axisChoices = document.querySelectorAll('input[type=radio]');
-  axisChoices.forEach((choice) => {
-    choice.addEventListener('change', (e) => {
-      console.log(e.target.value);
-      axisChange(chart);
-    });
-  });
-};
-*/
 const makeHorizontalAxesControls = () => {
   const header = document.createElement('h2');
   header.textContent = 'Select the horizontal axes:';
@@ -86,7 +75,7 @@ const makeHorizontalAxesControls = () => {
   // addELsToAxesControls(chart);
 };
 
-const makeSlopeSlider = () => {
+const makeSlopeSlider = (chart) => {
   const header = document.createElement('h2');
   header.textContent = 'Adjust the slope of the trendline:';
   left.append(header);
@@ -94,9 +83,10 @@ const makeSlopeSlider = () => {
   slopeSlider.id = 'slope_slider';
   slopeSlider.type = 'range';
   slopeSlider.min = 0;
-  slopeSlider.max = 1;
+  const maxY = chart.data.datasets[0].data.reduce((a, b) => (a.y > b.y ? a : b)).y;
+  slopeSlider.max = maxY * 3;
   slopeSlider.defaultValue = 0;
-  slopeSlider.step = 0.001;
+  slopeSlider.step = slopeSlider.max / 300;
   slopeSlider.classList.add('slider');
   left.appendChild(slopeSlider);
 };
@@ -181,7 +171,7 @@ const makeLeftside = (chart) => {
   // newDatasetButton.onclick = resetFn;
   left.append(newDatasetButton);
   makeHorizontalAxesControls(chart);
-  makeSlopeSlider();
+  makeSlopeSlider(chart);
   renderTrendlineEquation();
 };
 

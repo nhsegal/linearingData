@@ -25,19 +25,6 @@ let yName;
 let ySymbol;
 let yUnits;
 
-function pickExponent() {
-  const num = Math.random();
-  if (num > 0.66) {
-    exponent = 2;
-    return;
-  }
-  if (num > 0.33) {
-    exponent = -1;
-    return;
-  }
-  exponent = -2;
-}
-
 function alterHTML(exp) {
   const rawDataOption = document.querySelector('label[for="rawData"]');
   const sqDataOption = document.querySelector('label[for="sqData"]');
@@ -276,15 +263,12 @@ function sliderFunction() {
   const val = document.getElementById('slope-slider').value;
   myChartJS.options.annotation.annotations[0].endValue = val;
   myChartJS.update();
-
   document.getElementById('trendline-equation-slope-math').textContent = Number.parseFloat(val / xMax).toFixed(2);
   document.getElementById('trendline-equation-x-math').textContent = 'x';
   document.getElementById('trendline-equation-y').textContent = `${ySymbol} = (`;
   document.getElementById('trendline-equation-slope').textContent = Number.parseFloat(val / xMax).toFixed(2);
   document.getElementById('trendline-equation-y-math').textContent = 'y = ';
-
   document.getElementById('fup').textContent = yUnits;
-
   if (fitExponent != 1) {
     document.getElementById(
       'trendline-equation-x',
