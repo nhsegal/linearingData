@@ -7,6 +7,8 @@ const makeChart = (experiment, dataObject, option) => {
   let xLabel = experiment.indepVar;
   let xUnits = experiment.indepVarUnits;
   let dataToPlot;
+  // let xAxesRange;
+  // let yAxesRange;
 
   if (option === 1) {
     dataToPlot = dataObject.rawData;
@@ -41,6 +43,7 @@ const makeChart = (experiment, dataObject, option) => {
   }
 
   const ctx = document.getElementById('myChart').getContext('2d');
+  let yAxesticks = [];
   const myChartJS = new Chart(ctx, {
     type: 'line',
     data: {
@@ -57,7 +60,6 @@ const makeChart = (experiment, dataObject, option) => {
         },
       ],
     },
-
     options: {
       aspectRatio: 1,
       plugins: {
@@ -78,30 +80,12 @@ const makeChart = (experiment, dataObject, option) => {
               scaleID: 'y',
               value: 0,
               endValue: 1,
-              // xMin: 0,
-              // yMin: 0,
               borderColor: 'rgb(55, 139, 132)',
               borderWidth: 2,
             },
           },
         },
-        /*
-        annotation: {
-          annotations: [
-            {
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 0,
-              endValue: 10, // trendlineSlope,
-              borderColor: 'rgb(75, 192, 192)',
-              borderWidth: 4,
-            },
-          ],
-        },
-        */
       },
-
       layout: {
         padding: {
           right: 30,
@@ -110,7 +94,6 @@ const makeChart = (experiment, dataObject, option) => {
       },
       responsive: true,
       maintainAspectRatio: true,
-
       scales: {
         x: {
           type: 'linear',
@@ -131,30 +114,21 @@ const makeChart = (experiment, dataObject, option) => {
               size: 16,
             },
           },
-        },
-      },
-      /*
-
-      {
-
-        yAxes: [
-          {
-
-            ticks: {
-              beginAtZero: true,
-              fontSize: 16,
-            },
-            afterSetDimensions(axes) {
-            //  preLineMax = axes.max;
-            // What do to here?
+          ticks: {
+            beginAtZero: true,
+            callback(value, index, values) {
+              yAxesticks = values;
+              return value;
             },
           },
-        ],
-
+        },
+      //  beforeSetDimensions() {
+      //    console.log('asdfasd');
+      //  },
       },
-*/
     },
   });
+  console.log(yAxesticks);
   return myChartJS;
 };
 

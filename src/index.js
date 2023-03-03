@@ -47,8 +47,12 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${curren
 // add eventlistener to slider
 const sliderFunction = () => {
   const val = document.getElementById('slope_slider').value;
+  // Get the maximum x and y values of the axes, save them and set
+  const yMax = myChart.options.scales.y.ticks;
+
   myChart.options.plugins.annotation.annotations.line1.endValue = val;
   console.log(val);
+  console.log(yMax);
 
   // console.log({ slope });
   myChart.update();
