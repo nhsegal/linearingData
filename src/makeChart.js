@@ -7,9 +7,6 @@ const makeChart = (experiment, dataObject, option) => {
   let xLabel = experiment.indepVar;
   let xUnits = experiment.indepVarUnits;
   let dataToPlot;
-  // let xAxesRange;
-  // let yAxesRange;
-
   if (option === 1) {
     dataToPlot = dataObject.rawData;
   }
@@ -43,7 +40,8 @@ const makeChart = (experiment, dataObject, option) => {
   }
 
   const ctx = document.getElementById('myChart').getContext('2d');
-  let yAxesticks = [];
+  let yAxesMax = 0;
+  let xAxesMax = 0;
   const myChartJS = new Chart(ctx, {
     type: 'line',
     data: {
@@ -74,12 +72,13 @@ const makeChart = (experiment, dataObject, option) => {
           display: false,
         },
         annotation: {
+
           annotations: {
             line1: {
               type: 'line',
               scaleID: 'y',
               value: 0,
-              endValue: 1,
+              endValue: 0,
               borderColor: 'rgb(55, 139, 132)',
               borderWidth: 2,
             },
@@ -104,6 +103,13 @@ const makeChart = (experiment, dataObject, option) => {
               size: 16,
             },
           },
+          ticks: {
+            beginAtZero: true,
+            callback(value) {
+              if (value > xAxesMax) xAxesMax = value;
+              return value;
+            },
+          },
         },
         y: {
           type: 'linear',
@@ -116,20 +122,17 @@ const makeChart = (experiment, dataObject, option) => {
           },
           ticks: {
             beginAtZero: true,
-            callback(value, index, values) {
-              yAxesticks = values;
+            callback(value) {
+              if (value > yAxesMax) yAxesMax = value;
               return value;
             },
           },
         },
-      //  beforeSetDimensions() {
-      //    console.log('asdfasd');
-      //  },
       },
     },
   });
-  console.log(yAxesticks);
-  return myChartJS;
+
+  return { chart: myChartJS, xAxesMax, yAxesMax };
 };
 
 export default makeChart;

@@ -72,7 +72,6 @@ const makeHorizontalAxesControls = () => {
     invSqdDataOption,
     invSqdDataOptionLabel,
   );
-  // addELsToAxesControls(chart);
 };
 
 const makeSlopeSlider = (chart) => {
@@ -86,7 +85,7 @@ const makeSlopeSlider = (chart) => {
   const maxY = chart.data.datasets[0].data.reduce((a, b) => (a.y > b.y ? a : b)).y;
   slopeSlider.max = maxY * 3;
   slopeSlider.defaultValue = 0;
-  slopeSlider.step = slopeSlider.max / 300;
+  slopeSlider.step = slopeSlider.max / 400;
   slopeSlider.classList.add('slider');
   left.appendChild(slopeSlider);
 };

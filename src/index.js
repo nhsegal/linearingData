@@ -16,8 +16,8 @@ const currentDataObject = makeData(
   currentExperiment.exponent,
   currentExperiment.indepVarRange,
 );
-const myChart = makeChart(currentExperiment, currentDataObject, 1);
 
+const { chart: myChart, xAxesMax, yAxesMax } = makeChart(currentExperiment, currentDataObject, 1);
 makeHeader();
 makeLeftside(myChart);
 
@@ -48,13 +48,12 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${curren
 const sliderFunction = () => {
   const val = document.getElementById('slope_slider').value;
   // Get the maximum x and y values of the axes, save them and set
-  const yMax = myChart.options.scales.y.ticks;
-
+  // myChart.options.animation.duration = 50;
+  myChart.options.plugins.annotation.animations = false;
   myChart.options.plugins.annotation.annotations.line1.endValue = val;
-  console.log(val);
-  console.log(yMax);
+  console.log(val / xAxesMax);
+  myChart.options.scales.y.max = yAxesMax;
 
-  // console.log({ slope });
   myChart.update();
   // document.getElementById('trendline-equation-slope-math').textContent
   //= Number.parseFloat(val / xMax).toFixed(2);
@@ -70,4 +69,4 @@ const sliderFunction = () => {
 };
 
 const slopeSlider = document.querySelector('#slope_slider');
-slopeSlider.addEventListener('change', sliderFunction);
+slopeSlider.addEventListener('input', sliderFunction);

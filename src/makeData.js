@@ -9,8 +9,16 @@ const makeData = (N, noise, coefficient, exponent, xMax) => {
     let xx = (xMax / 10)
     * ((10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
     while (xx <= 0) {
-      xx = (10 * (1 + i)) / N
-        + noise * (Math.round(Math.random() * 10) / 10 - 0.5);
+      xx = (xMax / 10)
+      * ((10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
+    }
+    if (exponent < 0) {
+      xx = (xMax / 10)
+      * ((10 * (1 + (i * i) / 10)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
+      while (xx <= 0) {
+        xx = (xMax / 10)
+        * ((10 * (1 + (i * i) / 10)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
+      }
     }
     const yy = Math.round(
       100
@@ -18,10 +26,24 @@ const makeData = (N, noise, coefficient, exponent, xMax) => {
             * (xx
               + (1 + 0.5 * exponent)
                 * (4 / (i + 4))
-                * noise
+                * (noise / 2)
                 * (Math.round(Math.random() * 10) / 10 - 0.5))
               ** exponent),
     ) / 100;
+    /*
+    while (yy <= 0) {
+      yy = Math.round(
+        100
+            * (coefficient
+              * (xx
+                + (1 + 0.5 * exponent)
+                  * (4 / (i + 4))
+                  * (noise / 2)
+                  * (Math.round(Math.random() * 10) / 10 - 0.5))
+                ** exponent),
+      ) / 100;
+    }
+    */
 
     dataObject.rawData.push({
       x: Math.round(100 * xx) / 100,
