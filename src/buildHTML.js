@@ -38,37 +38,38 @@ const makeHorizontalAxesControls = () => {
   rawDataOption.type = 'radio';
   rawDataOption.name = 'x-axis';
   rawDataOption.value = 1;
-  rawDataOption.id = 'raw-data-option';
+  rawDataOption.id = 'raw_data_option';
   rawDataOption.checked = true;
   const rawDataOptionLabel = document.createElement('label');
-  rawDataOptionLabel.for = 'raw-data-option';
+  rawDataOptionLabel.setAttribute('for', 'raw_data_option');
+
   rawDataOptionLabel.innerHTML = 'placeholder <br>';
 
   const sqdDataOption = document.createElement('input');
   sqdDataOption.type = 'radio';
   sqdDataOption.name = 'x-axis';
   sqdDataOption.value = 2;
-  sqdDataOption.id = 'sqd-data-option';
+  sqdDataOption.id = 'sqd_data_option';
   const sqdDataOptionLabel = document.createElement('label');
-  sqdDataOptionLabel.for = 'sqd-data-option';
+  sqdDataOptionLabel.setAttribute('for', 'sqd_data_option');
   sqdDataOptionLabel.innerHTML = 'placeholder <br>';
 
   const invDataOption = document.createElement('input');
   invDataOption.type = 'radio';
   invDataOption.name = 'x-axis';
   invDataOption.value = -1;
-  invDataOption.id = 'inv-data-option';
+  invDataOption.id = 'inv_data_option';
   const invDataOptionLabel = document.createElement('label');
-  invDataOptionLabel.for = 'inv-data-option';
+  invDataOptionLabel.setAttribute('for', 'inv_data_option');
   invDataOptionLabel.innerHTML = 'placeholder <br>';
 
   const invSqdDataOption = document.createElement('input');
   invSqdDataOption.type = 'radio';
   invSqdDataOption.name = 'x-axis';
   invSqdDataOption.value = -2;
-  invSqdDataOption.id = 'invsqd-data-option';
+  invSqdDataOption.id = 'invsqd_data_option';
   const invSqdDataOptionLabel = document.createElement('label');
-  invSqdDataOptionLabel.for = 'invsqd-data-option';
+  invSqdDataOptionLabel.setAttribute('for', 'invsqd_data_option');
   invSqdDataOptionLabel.innerHTML = 'placeholder <br>';
 
   left.append(

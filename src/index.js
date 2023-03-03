@@ -13,14 +13,12 @@ const currentDataObject = makeData(N, noise, coefficient, currentExperiment.expo
 const myChart = makeChart(currentExperiment, currentDataObject, 1);
 
 makeHeader();
-
 makeLeftside(myChart);
 
 const axisChoices = document.querySelectorAll('input[type=radio]');
 axisChoices.forEach((choice) => {
   choice.addEventListener('change', (e) => {
     const choiceVal = e.target.value;
-    console.log(choiceVal);
     if (choiceVal === '1') {
       myChart.data.datasets[0].data = currentDataObject.rawData;
     } else if (choiceVal === '2') {
@@ -34,5 +32,7 @@ axisChoices.forEach((choice) => {
   });
 });
 
-// myChartJS.options.scales.yAxes[0].ticks.max = preLineMax;
-// document.getElementById('slope-slider').max = (1 + Math.random()) * preLineMax;
+document.querySelector('label[for="raw_data_option"]').innerHTML = ` ${currentExperiment.indepVar} <br>`;
+document.querySelector('label[for="sqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{00B2} <br>`;
+document.querySelector('label[for="inv_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B9} <br>`;
+document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B2} <br>`;
