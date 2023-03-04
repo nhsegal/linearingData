@@ -4,6 +4,7 @@ import { makeHeader, makeLeftside } from './buildHTML';
 import pickExperiment from './pickExperiment';
 import makeData from './makeData';
 import { sliderFunction, radioButtonCallback } from './callbackFunctions';
+import { produceXLabel } from './helperFunctions';
 
 const N = 12; // Number of data points
 const currentExperiment = pickExperiment(); // Object with exponent, labels, etc
@@ -61,10 +62,10 @@ axisChoices.forEach((choice) => {
   choice.addEventListener('change', (e) => radioButtonCallback(e, currentDataObject, currentExperiment));
 });
 
-document.querySelector('label[for="raw_data_option"]').innerHTML = ` ${currentExperiment.indepVar} <br>`;
-document.querySelector('label[for="sqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{00B2} <br>`;
-document.querySelector('label[for="inv_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B9} <br>`;
-document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${currentExperiment.indepVar}\u{207B}\u{00B2} <br>`;
+document.querySelector('label[for="raw_data_option"]').innerHTML = ` ${produceXLabel(currentExperiment.indepVar, 1)} <br>`;
+document.querySelector('label[for="sqd_data_option"]').innerHTML = ` ${produceXLabel(currentExperiment.indepVar, 2)} <br>`;
+document.querySelector('label[for="inv_data_option"]').innerHTML = ` ${produceXLabel(currentExperiment.indepVar, -1)} <br>`;
+document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${produceXLabel(currentExperiment.indepVar, -2)} <br>`;
 
 // add eventlistener to slider
 

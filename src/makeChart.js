@@ -39,12 +39,11 @@ const makeChart = (experiment, dataObject, option) => {
     }
   }
 
-  /* eslint-disable no-use-before-define */
   function setScales() {
-    const yScale = myChartJS.scales.y.end;
-    myChartJS.scales.y.ticks.max = yScale; // dis
+    const myChart = Chart.getChart(document.getElementById('myChart'));
+    const yScale = myChart.scales.y.end;
+    myChart.scales.y.ticks.max = yScale;
   }
-  /* eslint-enable no-use-before-define */
 
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChartJS = new Chart(ctx, {
