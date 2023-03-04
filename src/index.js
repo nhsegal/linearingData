@@ -51,8 +51,22 @@ const sliderFunction = () => {
   // myChart.options.animation.duration = 50;
   myChart.options.plugins.annotation.animations = false;
   myChart.options.plugins.annotation.annotations.line1.endValue = val;
-  console.log(val / xAxesMax);
-  myChart.options.scales.y.max = yAxesMax;
+  let slope = val / xAxesMax;
+  console.log(slope);
+  if (yAxesMax / xAxesMax > 100) {
+    slope = 10 * (slope / 10).toFixed(1);
+  } else if (yAxesMax / xAxesMax > 10) {
+    slope = (slope).toFixed(1);
+  } else if (yAxesMax / xAxesMax > 1) {
+    slope = (slope).toFixed(2);
+  } else if (yAxesMax / xAxesMax > 0.1) {
+    slope = (slope).toFixed(3);
+  } else if (yAxesMax / xAxesMax > 0.01) {
+    slope = (slope).toFixed(4);
+  } else if (yAxesMax / xAxesMax > 0.001) {
+    slope = (slope).toFixed(5);
+  }
+  console.log(slope);
 
   myChart.update();
   // document.getElementById('trendline-equation-slope-math').textContent
