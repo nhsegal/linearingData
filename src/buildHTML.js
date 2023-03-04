@@ -150,12 +150,12 @@ const renderTrendlineEquation = () => {
 
   const physicsTrendlineX = document.createElement('div');
   physicsTrendlineX.classList.add('trendline');
-  physicsTrendlineX.id = 'trendline-equation-x-math';
+  physicsTrendlineX.id = 'trendline-equation-x-physics';
   physicsTrendlineX.textContent = 'x';
   physicsVersionCtn.append(
     physicsTrendlineY,
-    renderUnitsFraction('kg', 'd<sup>2</sup>', physicsTrendlineSlopeUnits),
     physicsTrendlineSlope,
+    renderUnitsFraction('', '', physicsTrendlineSlopeUnits),
     physicsTrendlineX,
   );
 

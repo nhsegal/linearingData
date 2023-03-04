@@ -1,10 +1,12 @@
 import Chart from 'chart.js/auto';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import { produceXLabel, produceXUnits } from './helperFunctions';
 
 Chart.register(annotationPlugin);
 
 const sliderFunction = (experiment) => {
   const myChart = Chart.getChart(document.getElementById('myChart'));
+  const choiceVal = document.querySelector("input[type='radio']:checked").value;
   const val = document.getElementById('slope_slider').value;
   const yTop = myChart.scales.y.end;
   myChart.options.plugins.annotation.animations = false;
@@ -25,12 +27,14 @@ const sliderFunction = (experiment) => {
   }
   myChart.options.scales.y.max = yTop;
   myChart.update();
+  document.getElementById('trendline-equation-y-math').textContent = 'y = ';
   document.getElementById('trendline-equation-slope-math').textContent = slope;
   document.getElementById('trendline-equation-x-math').textContent = 'x';
   document.getElementById('trendline-equation-y-physics').textContent = `${experiment.depVarSymbol} = `;
-  document.getElementById('trendline-equation-slope-physics').textContent = `( ${slope}`;
-  document.getElementById('trendline-equation-y-math').textContent = 'y = ';
+  document.getElementById('trendline-equation-slope-physics').textContent = `(${slope}`;
+  document.getElementById('trendline-equation-x-physics').textContent = `${produceXLabel(experiment.indepVarSymbol, choiceVal)}`;
   document.getElementById('fup').textContent = `${experiment.yUnits}`;
+  document.getElementById('fdn').textContent = `${experiment.xUnits}`;
 };
 
 const radioButtonCallback = (e, dataObject, experiment) => {
@@ -40,25 +44,15 @@ const radioButtonCallback = (e, dataObject, experiment) => {
   const choiceVal = e.target.value;
   if (choiceVal === '1') {
     myChart.data.datasets[0].data = dataObject.rawData;
-    myChart.options.scales.x.title.text = `${xLabel} (${xUnits})`;
-    sliderFunction(experiment);
   } else if (choiceVal === '2') {
     myChart.data.datasets[0].data = dataObject.sqData;
-    // const xUnitsFrac = xUnits.split('/');
-    // if (xUnitsFrac.length > 1) {
-    //  xUnits = `${xUnits[0]}\u{00B2}/${xUnits[2]}\u{00B2}`;
-    // } else {
-    // xUnits = `${currentExperiment.indepVarUnits}\u{00B2}`;
-    // }
-    myChart.options.scales.x.title.text = `${xLabel}\u{00B2} (${xUnits}\u{00B2})`;
-    sliderFunction(experiment);
   } else if (choiceVal === '-1') {
     myChart.data.datasets[0].data = dataObject.invData;
-    sliderFunction(experiment);
   } else if (choiceVal === '-2') {
     myChart.data.datasets[0].data = dataObject.invSqData;
-    sliderFunction(experiment);
   }
+  myChart.options.scales.x.title.text = `${produceXLabel(xLabel, choiceVal)} (${produceXUnits(xUnits, choiceVal)})`;
+  sliderFunction(experiment);
   myChart.update();
 };
 

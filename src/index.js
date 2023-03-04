@@ -23,40 +23,6 @@ const myChart = makeChart(currentExperiment, currentDataObject, 1);
 makeHeader();
 makeLeftside(myChart);
 
-/*
-if (option === 1) {
-  dataToPlot = dataObject.rawData;
-}
-if (option === 2) {
-  dataToPlot = dataObject.sqData;
-  xLabel = `${experiment.indepVar}\u{00B2}`;
-  const xUnitsFrac = xUnits.split('/');
-  if (xUnitsFrac.length > 1) {
-    xUnits = `${xUnits[0]}\u{00B2}/${xUnits[2]}\u{00B2}`;
-  } else {
-    xUnits = `${experiment.indepVarUnits}\u{00B2}`;
-  }
-} else if (option === -1) {
-  dataToPlot = dataObject.invData;
-  xLabel = `${experiment.indepVar}\u{207B}\u{00B9}`;
-  const xUnitsFrac = xUnits.split('/');
-  if (xUnitsFrac.length > 1) {
-    xUnits = `${xUnits[0]}\u{207B}\u{00B9}/${xUnits[2]}\u{207B}\u{00B9}`;
-  } else {
-    xUnits = `${experiment.indepVarUnits}\u{207B}\u{00B9}`;
-  }
-} else if (option === -2) {
-  dataToPlot = dataObject.invSqData;
-  xLabel = `${experiment.indepVar}\u{207B}\u{00B2}`;
-  const xUnitsFrac = xUnits.split('/');
-  if (xUnitsFrac.length > 1) {
-    xUnits = `${xUnits[0]}\u{207B}\u{00B2}/${xUnits[2]}\u{207B}\u{00B2}`;
-  } else {
-    xUnits = `${experiment.indepVarUnits}\u{207B}\u{00B2}`;
-  }
-}
-*/
-
 const axisChoices = document.querySelectorAll('input[type=radio]');
 axisChoices.forEach((choice) => {
   choice.addEventListener('change', (e) => radioButtonCallback(e, currentDataObject, currentExperiment));

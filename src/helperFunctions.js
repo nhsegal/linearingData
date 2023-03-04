@@ -20,19 +20,19 @@ const produceXUnits = (str, pow) => {
     return str;
   }
   if (pow === 2 || pow === '2') {
-    if (!str.contains('/')) return `${str}\u{00B2}`;
+    if (!str.includes('/')) return `${str}\u{00B2}`;
     const frac = str.split('/');
-    return `${frac[0]}\u{00B2}${frac[2]}\u{00B2}`;
+    return `${frac[0]}\u{00B2}/${frac[1]}\u{00B2}`;
   }
   if (pow === -1 || pow === '-1') {
-    if (!str.contains('/')) return `${str}\u{207B}\u{00B9}`;
+    if (!str.includes('/')) return `${str}\u{207B}\u{00B9}`;
     const frac = str.split('/');
-    return `${frac[0]}\u{207B}\u{00B9}${frac[2]}\u{207B}\u{00B9}`;
+    return `${frac[1]}/${frac[0]}`;
   }
   if (pow === -2 || pow === '-2') {
-    if (!str.contains('/')) return `${str}\u{207B}\u{00B2}`;
+    if (!str.includes('/')) return `${str}\u{207B}\u{00B2}`;
     const frac = str.split('/');
-    return `${frac[0]}\u{207B}\u{00B2}${frac[2]}\u{207B}\u{00B2}`;
+    return `${frac[1]}\u{00B2}/${frac[0]}\u{00B2}`;
   }
   console.error('unexpected exponent');
   return true;
