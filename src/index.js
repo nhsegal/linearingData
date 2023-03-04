@@ -48,11 +48,12 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${curren
 const sliderFunction = () => {
   const val = document.getElementById('slope_slider').value;
   // Get the maximum x and y values of the axes, save them and set
-  // myChart.options.animation.duration = 50;
+  const yTop = myChart.scales.y.end;
+  console.log('Test:', yTop);
   myChart.options.plugins.annotation.animations = false;
   myChart.options.plugins.annotation.annotations.line1.endValue = val;
   let slope = val / xAxesMax;
-  console.log(slope);
+  // console.log(slope);
   if (yAxesMax / xAxesMax > 100) {
     slope = 10 * (slope / 10).toFixed(1);
   } else if (yAxesMax / xAxesMax > 10) {
@@ -66,7 +67,8 @@ const sliderFunction = () => {
   } else if (yAxesMax / xAxesMax > 0.001) {
     slope = (slope).toFixed(5);
   }
-  console.log(slope);
+
+  myChart.options.scales.y.max = yTop;
 
   myChart.update();
   // document.getElementById('trendline-equation-slope-math').textContent

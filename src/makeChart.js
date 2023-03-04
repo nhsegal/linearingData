@@ -44,10 +44,10 @@ const makeChart = (experiment, dataObject, option) => {
 
   function setScales(c) {
     const xScale = c.chart.scales.x.end;
-    const yScale = c.chart.scales.y.ticks.end;
+    const yScale = c.chart.scales.y.end;
     xAxesMax = xScale;
     yAxesMax = yScale;
-    c.chart.scales.y.end = yScale; // dis
+    c.chart.scales.y.ticks.max = yScale; // dis
     console.log('X Scale:', xScale);
     console.log('Y Scale:', yScale);
   }
@@ -145,6 +145,7 @@ const makeChart = (experiment, dataObject, option) => {
   // get the x and y scales of the chart
   xAxesMax = myChartJS.scales.x.end;
   yAxesMax = myChartJS.scales.y.end;
+  myChartJS.scales.y.ticks.max = yAxesMax;
 
   // log the x and y scale objects to the console
 
