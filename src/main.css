@@ -136,13 +136,14 @@ ul {
   font-family: 'Times New Roman', Times, serif;  
 }
 
-#trendline-equation-x-math{
+#trendline-equation-x-math, 
+#trendline-equation-x-physics,
+#trendline-equation-y-math,
+#trendline-equation-y-physics{
   font-style: italic;
 }
 
-#trendline-equation-y-math{
-  font-style: italic;
-}
+
 
 .trendline-container-physics {
   display: flex;

@@ -39,18 +39,12 @@ const makeChart = (experiment, dataObject, option) => {
     }
   }
 
-  let xAxesMax;
-  let yAxesMax;
-
-  function setScales(c) {
-    const xScale = c.chart.scales.x.end;
-    const yScale = c.chart.scales.y.end;
-    xAxesMax = xScale;
-    yAxesMax = yScale;
-    c.chart.scales.y.ticks.max = yScale; // dis
-    console.log('X Scale:', xScale);
-    console.log('Y Scale:', yScale);
+  /* eslint-disable no-use-before-define */
+  function setScales() {
+    const yScale = myChartJS.scales.y.end;
+    myChartJS.scales.y.ticks.max = yScale; // dis
   }
+  /* eslint-enable no-use-before-define */
 
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChartJS = new Chart(ctx, {
@@ -72,8 +66,8 @@ const makeChart = (experiment, dataObject, option) => {
     options: {
       aspectRatio: 1,
       animation: {
-        onComplete(chart) {
-          setScales(chart);
+        onComplete() {
+          setScales();
         },
       },
       plugins: {
@@ -88,7 +82,6 @@ const makeChart = (experiment, dataObject, option) => {
           display: false,
         },
         annotation: {
-
           annotations: {
             line1: {
               type: 'line',
@@ -142,14 +135,7 @@ const makeChart = (experiment, dataObject, option) => {
     },
   });
 
-  // get the x and y scales of the chart
-  xAxesMax = myChartJS.scales.x.end;
-  yAxesMax = myChartJS.scales.y.end;
-  myChartJS.scales.y.ticks.max = yAxesMax;
-
-  // log the x and y scale objects to the console
-
-  return { chart: myChartJS, xAxesMax, yAxesMax };
+  return myChartJS;
 };
 
 export default makeChart;
