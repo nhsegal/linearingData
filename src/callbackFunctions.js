@@ -41,6 +41,8 @@ const sliderFunction = (experiment) => {
 const radioButtonCallback = (e, dataObject, experiment) => {
   const myChart = Chart.getChart(document.getElementById('myChart'));
   const xLabel = experiment.indepVar;
+  const yLabel = experiment.depVar;
+  const xSymbol = experiment.indepVarSymbol;
   const xUnits = experiment.indepVarUnits;
   const choiceVal = e.target.value;
   if (choiceVal === '1') {
@@ -52,7 +54,10 @@ const radioButtonCallback = (e, dataObject, experiment) => {
   } else if (choiceVal === '-2') {
     myChart.data.datasets[0].data = dataObject.invSqData;
   }
-  myChart.options.scales.x.title.text = `${produceXLabel(xLabel, choiceVal)} (${produceXUnits(xUnits, choiceVal)})`;
+  myChart.options.scales.x.title.text = `${produceXLabel(xLabel, choiceVal)} `
+  + `${produceXLabel(xSymbol, choiceVal)} (${produceXUnits(xUnits, choiceVal)})`;
+
+  myChart.options.plugins.title.text = `${produceXLabel(yLabel, 1)} vs. ${produceXLabel(xLabel, choiceVal)}`;
   sliderFunction(experiment);
   myChart.update();
 };

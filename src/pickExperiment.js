@@ -5,10 +5,10 @@ const pickExperiment = () => {
     case 1:
       experiment.exponent = 2;
       experiment.indepVar = 'Side Length';
-      experiment.indepVarSymbol = '𝘭';
+      experiment.indepVarSymbol = '𝑙';
       experiment.indepVarUnits = 'cm';
       experiment.depVar = 'Mass';
-      experiment.depVarSymbol = '𝘮';
+      experiment.depVarSymbol = '𝑚';
       experiment.depVarUnits = 'g';
       experiment.indepVarRange = 30;
       experiment.coefficientRange = 0.5;
@@ -20,7 +20,7 @@ const pickExperiment = () => {
       experiment.indepVarSymbol = '𝘷';
       experiment.indepVarUnits = 'm/s';
       experiment.depVar = 'Depth';
-      experiment.depVarSymbol = '𝘥';
+      experiment.depVarSymbol = '𝑑';
       experiment.depVarUnits = 'mm';
       experiment.indepVarRange = 6;
       experiment.coefficientRange = 0.9;
@@ -29,10 +29,10 @@ const pickExperiment = () => {
     case 3:
       experiment.exponent = -1;
       experiment.indepVar = 'Length';
-      experiment.indepVarSymbol = '𝘭';
+      experiment.indepVarSymbol = '𝑙';
       experiment.indepVarUnits = 'cm';
       experiment.depVar = 'Height';
-      experiment.depVarSymbol = '𝘩';
+      experiment.depVarSymbol = 'ℎ';
       experiment.depVarUnits = 'cm';
       experiment.indepVarRange = 20;
       experiment.coefficientRange = 400;
@@ -41,10 +41,10 @@ const pickExperiment = () => {
     case 4:
       experiment.exponent = -1;
       experiment.indepVar = 'Mass';
-      experiment.indepVarSymbol = '𝘮';
+      experiment.indepVarSymbol = '𝑚';
       experiment.indepVarUnits = 'g';
       experiment.depVar = 'Max Height';
-      experiment.depVarSymbol = '𝘩';
+      experiment.depVarSymbol = 'ℎ';
       experiment.depVarUnits = 'cm';
       experiment.indepVarRange = 50;
       experiment.coefficientRange = 1;
@@ -53,10 +53,10 @@ const pickExperiment = () => {
     case 5:
       experiment.exponent = -2;
       experiment.indepVar = 'Distance';
-      experiment.indepVarSymbol = '𝘥';
+      experiment.indepVarSymbol = '𝑑';
       experiment.indepVarUnits = 'm';
       experiment.depVar = 'Intensity';
-      experiment.depVarSymbol = '𝘐';
+      experiment.depVarSymbol = '𝐼';
       experiment.depVarUnits = 'W/m\u{00B2}';
       experiment.indepVarRange = 4;
       experiment.coefficientRange = 3;
@@ -65,10 +65,10 @@ const pickExperiment = () => {
     case 6:
       experiment.exponent = -2;
       experiment.indepVar = 'Radius';
-      experiment.indepVarSymbol = 'r';
+      experiment.indepVarSymbol = '𝑟';
       experiment.indepVarUnits = 'cm';
       experiment.depVar = 'Terminal Speed';
-      experiment.depVarSymbol = '𝘷';
+      experiment.depVarSymbol = '𝑣';
       experiment.depVarUnits = 'cm/s';
       experiment.indepVarRange = 30;
       experiment.coefficientRange = 3;

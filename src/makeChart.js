@@ -1,10 +1,7 @@
 import Chart from 'chart.js/auto';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import { transform, getFonts, revertTransform } from 'convert-unicode-fonts';
 
 Chart.register(annotationPlugin);
-
-const fonts = getFonts();
 
 const makeChart = (experiment, dataObject, option) => {
   let xLabel = experiment.indepVar;
