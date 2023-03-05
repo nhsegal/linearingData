@@ -63,13 +63,13 @@ const radioButtonCallback = (e, dataObject, experiment) => {
 };
 
 const plotFunction = () => {
-  console.log('asdfasdf');
   const myChart = Chart.getChart(document.getElementById('myChart'));
-  const xMax = myChart.options.scales.x.max;
-  const yMax = myChart.options.scales.y.max;
+  const xMax = myChart.scales.x.end;
+  const yMax = myChart.scales.y.end;
   const choiceVal = document.querySelector("input[type='radio']:checked").value;
   const coeff = document.getElementById('coefficient').value;
   const exp = parseInt(document.getElementById('exp').value, 10);
+  const idealDataObject;
   const idealSet = [];
 
   if (!(exp === -2 || exp === -1 || exp === 1 || exp === 2)) {
@@ -104,6 +104,8 @@ const plotFunction = () => {
     borderWidth: 1,
     pointRadius: 0,
   };
+
+
 
   myChart.options.scales.y.max = yMax;
   myChart.update();
