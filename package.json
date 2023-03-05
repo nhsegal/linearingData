@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "chart.js": "^4.2.1",
-    "chartjs-plugin-annotation": "^2.1.2"
+    "chartjs-plugin-annotation": "^2.1.2",
+    "convert-unicode-fonts": "^1.0.1"
   }
 }

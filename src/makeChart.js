@@ -1,7 +1,10 @@
 import Chart from 'chart.js/auto';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import { transform, getFonts, revertTransform } from 'convert-unicode-fonts';
 
 Chart.register(annotationPlugin);
+
+const fonts = getFonts();
 
 const makeChart = (experiment, dataObject, option) => {
   let xLabel = experiment.indepVar;
@@ -106,7 +109,7 @@ const makeChart = (experiment, dataObject, option) => {
           type: 'linear',
           title: {
             display: true,
-            text: `${xLabel} (${xUnits})`,
+            text: `${xLabel} ${experiment.indepVarSymbol} (${xUnits})`,
             font: {
               size: 16,
             },
@@ -120,7 +123,7 @@ const makeChart = (experiment, dataObject, option) => {
           type: 'linear',
           title: {
             display: true,
-            text: `${experiment.depVar} (${experiment.depVarUnits})`,
+            text: `${experiment.depVar} ${experiment.depVarSymbol} (${experiment.depVarUnits})`,
             font: {
               size: 16,
             },
