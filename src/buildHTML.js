@@ -217,7 +217,7 @@ const makeRightside = () => {
 
   const plotDataButton = document.createElement('button');
   plotDataButton.type = 'button';
-  plotDataButton.id = 'submit';
+  plotDataButton.setAttribute('id', 'submit');
   plotDataButton.textContent = 'Submit';
 
   const errorDiv = document.createElement('div');

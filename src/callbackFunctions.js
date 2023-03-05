@@ -62,4 +62,68 @@ const radioButtonCallback = (e, dataObject, experiment) => {
   myChart.update();
 };
 
-export { sliderFunction, radioButtonCallback };
+const plotFunction = () => {
+  console.log('asdfasdf');
+  const myChart = Chart.getChart(document.getElementById('myChart'));
+  const xMax = myChart.options.scales.x.max;
+  const yMax = myChart.options.scales.y.max;
+  const choiceVal = document.querySelector("input[type='radio']:checked").value;
+  const coeff = document.getElementById('coefficient').value;
+  const exp = parseInt(document.getElementById('exp').value, 10);
+  const idealSet = [];
+
+  if (!(exp === -2 || exp === -1 || exp === 1 || exp === 2)) {
+    document.getElementById('error').innerHTML = 'To fit the data, try picking the exponent from the set [-2, -1, 1, 2].';
+    return;
+  }
+
+  if (choiceVal === -2) {
+    // To extend the line
+    for (let i = 1; i < 10; i += 1) {
+      idealSet.push({
+        x: xMax * 0.002 * i,
+        y: coeff * (xMax * 0.002 * i) ** (exp / choiceVal),
+      });
+    }
+  }
+  for (let i = 1; i < 30; i += 1) {
+    idealSet.push({
+      x: (i * xMax) / 29,
+      y: coeff * ((i * xMax) / 29) ** (exp / choiceVal),
+    });
+  }
+
+  myChart.data.datasets[1] = {
+    label: 'Ideal Data Set',
+    type: 'scatter',
+    data: idealSet,
+    showLine: true,
+    fill: false,
+    borderColor: 'rgba(0, 99, 232, 1)',
+    backgroundColor: 'rgba(0, 99, 232, 1)',
+    borderWidth: 1,
+    pointRadius: 0,
+  };
+
+  myChart.options.scales.y.max = yMax;
+  myChart.update();
+/*
+  const fup3 = document.querySelector('#fup3');
+  const fdn3 = document.querySelector('#fdn3');
+  const yvar = document.querySelector('#trendline-equation-y-3');
+  const xvar = document.querySelector('#trendline-equation-x-3');
+  const slope3 = document.querySelector('#trendline-equation-slope-3');
+  yvar.textContent = `${ySymbol} = (`;
+  slope3.textContent = `${coeff}`;
+  if (exp !== 1) {
+    xvar.innerHTML = `) ${xSymbol}<sup style= 'font-size: 0.75rem;'>${exp}</sup>`;
+    fdn3.innerHTML = `${xUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`;
+  } else {
+    xvar.innerHTML = `) ${xSymbol}`;
+    fdn3.innerHTML = `${xUnits}`;
+  }
+  fup3.textContent = `${yUnits}`;
+  */
+};
+
+export { sliderFunction, radioButtonCallback, plotFunction };

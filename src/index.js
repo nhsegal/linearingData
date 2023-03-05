@@ -3,7 +3,7 @@ import makeChart from './makeChart';
 import { makeHeader, makeLeftside, makeRightside } from './buildHTML';
 import pickExperiment from './pickExperiment';
 import makeData from './makeData';
-import { sliderFunction, radioButtonCallback } from './callbackFunctions';
+import { sliderFunction, radioButtonCallback, plotFunction } from './callbackFunctions';
 import { produceXLabel } from './helperFunctions';
 
 const N = 12; // Number of data points
@@ -39,3 +39,5 @@ const slopeSlider = document.querySelector('#slope_slider');
 slopeSlider.addEventListener('input', () => { sliderFunction(currentExperiment); });
 
 makeRightside();
+const plotFxnButton = document.getElementById('submit');
+plotFxnButton.addEventListener('click', plotFunction);
