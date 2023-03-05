@@ -1,6 +1,6 @@
 import './main.css';
 import makeChart from './makeChart';
-import { makeHeader, makeLeftside } from './buildHTML';
+import { makeHeader, makeLeftside, makeRightside } from './buildHTML';
 import pickExperiment from './pickExperiment';
 import makeData from './makeData';
 import { sliderFunction, radioButtonCallback } from './callbackFunctions';
@@ -37,3 +37,5 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${produc
 
 const slopeSlider = document.querySelector('#slope_slider');
 slopeSlider.addEventListener('input', () => { sliderFunction(currentExperiment); });
+
+makeRightside();

@@ -8,7 +8,7 @@ h1 {
 
 h2 {
   font-size: 22px;
-  margin: 1rem 0.1rem 0.5rem 0rem;
+  margin: 0 0.1rem 0.5rem 0rem;
 }
 
 #explanation {
@@ -33,7 +33,7 @@ main{
 
 .left{
   width: calc(50% - 250px);
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 
@@ -76,11 +76,15 @@ button {
   font-size: 16px;
   padding: 5px 10px 5px 10px; 
   text-decoration: none;
-  margin: 0;
+  margin: 0 0 1rem 0;
+}
+
+.plotdiv {
+  margin: 0rem 0rem 2rem 0rem;
 }
 
 input[type=range] {
-  margin: 0 0 0 2rem;
+  margin: .25rem 0 1.5rem 2rem;
 }
 
 input[type=radio] {
@@ -98,10 +102,11 @@ span {
   justify-content: center;
   gap:2px;
   font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 
- #dep-var, #indep-var{
+ #dep_var, #indep_var{
   display: inline;
   font-size: 2rem;
 }
@@ -109,6 +114,7 @@ span {
 #exp{
   position: relative;
   top: -1.5rem;
+  width: 3rem;
 }
 
 
@@ -127,7 +133,7 @@ ul {
   border: 1px solid grey;
   border-radius: 10px;
   height: 3rem;
-  width: 80%;
+  width: 90%;
   margin-left: 2rem;
   margin-bottom: 1rem;
   padding-top: 6px;
@@ -144,6 +150,18 @@ ul {
 }
 
 
+#trendline-equation-x-math sup, 
+#trendline-equation-x-physics sup,
+#trendline-equation-y-math sup,
+#trendline-equation-y-physics sup{
+  
+  font-size: 1.2rem;
+
+  position: relative;
+  top: -3px;
+  left: 4px;
+}
+
 
 .trendline-container-physics {
   display: flex;
@@ -156,9 +174,9 @@ ul {
   border: 1px solid red;
   border-radius: 10px;
   height: 3rem;
-  width: 80%;
+  width: 90%;
   margin-left: 2rem;
-  padding-top: 6px;
+  
   text-align: center;
   background-color: rgb(252, 252, 37);
 }
@@ -184,6 +202,10 @@ ul {
 .fraction span.fdn {border-top: thin solid black;}
 .fraction span.bar {display: none;}
 
+.fraction sup {
+  position: relative;
+}
+
 #coefficient {
   width: 4rem;
   height: 2rem;
@@ -207,7 +229,8 @@ ul {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  font-family:Arial, Helvetica, sans-serif
+  font-family:Arial, Helvetica, sans-serif;
+
 }
 
 #modal-button {
@@ -218,13 +241,20 @@ ul {
   background-color: rgb(200,200,200);
 }
 
-
 .modal-content {
   background-color: #fefefe;
   margin: 5% auto; 
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+}
+
+.modal-content span{
+  position: relative;
+  top: -15px;
+  right: -7px;
+
 }
 
 /* The Close Button */

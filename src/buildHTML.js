@@ -22,7 +22,6 @@ const makeHeader = () => {
 const makeHorizontalAxesControls = () => {
   const header = document.createElement('h2');
   header.textContent = 'Select the horizontal axes:';
-
   const rawDataOption = document.createElement('input');
   rawDataOption.type = 'radio';
   rawDataOption.name = 'x-axis';
@@ -31,9 +30,7 @@ const makeHorizontalAxesControls = () => {
   rawDataOption.checked = true;
   const rawDataOptionLabel = document.createElement('label');
   rawDataOptionLabel.setAttribute('for', 'raw_data_option');
-
   rawDataOptionLabel.innerHTML = 'placeholder <br>';
-
   const sqdDataOption = document.createElement('input');
   sqdDataOption.type = 'radio';
   sqdDataOption.name = 'x-axis';
@@ -61,6 +58,10 @@ const makeHorizontalAxesControls = () => {
   invSqdDataOptionLabel.setAttribute('for', 'invsqd_data_option');
   invSqdDataOptionLabel.innerHTML = 'placeholder <br>';
 
+  const spacer = document.createElement('div');
+  spacer.classList.add('spacer');
+  spacer.innerHTML = ' <br>';
+
   left.append(
     header,
     rawDataOption,
@@ -71,6 +72,7 @@ const makeHorizontalAxesControls = () => {
     invDataOptionLabel,
     invSqdDataOption,
     invSqdDataOptionLabel,
+    spacer,
   );
 };
 
@@ -87,6 +89,7 @@ const makeSlopeSlider = (chart) => {
   slopeSlider.defaultValue = 0;
   slopeSlider.step = slopeSlider.max / 400;
   slopeSlider.classList.add('slider');
+
   left.appendChild(slopeSlider);
 };
 
@@ -115,17 +118,17 @@ const renderTrendlineEquation = () => {
   const mathTrendlineY = document.createElement('div');
   mathTrendlineY.classList.add('trendline');
   mathTrendlineY.id = 'trendline-equation-y-math';
-  mathTrendlineY.textContent = 'y=';
+  mathTrendlineY.textContent = '';
 
   const mathTrendlineSlope = document.createElement('div');
   mathTrendlineSlope.classList.add('trendline');
   mathTrendlineSlope.id = 'trendline-equation-slope-math';
-  mathTrendlineSlope.textContent = '8';
+  mathTrendlineSlope.textContent = '';
 
   const mathTrendlineX = document.createElement('div');
   mathTrendlineX.classList.add('trendline');
   mathTrendlineX.id = 'trendline-equation-x-math';
-  mathTrendlineX.textContent = 'x';
+  mathTrendlineX.textContent = '';
   mathVersionCtn.append(mathTrendlineY, mathTrendlineSlope, mathTrendlineX);
 
   left.append(header, mathVersionLabel, mathVersionCtn);
@@ -138,40 +141,91 @@ const renderTrendlineEquation = () => {
   const physicsTrendlineY = document.createElement('div');
   physicsTrendlineY.classList.add('trendline');
   physicsTrendlineY.id = 'trendline-equation-y-physics';
-  physicsTrendlineY.textContent = 'y=';
+  physicsTrendlineY.textContent = '';
 
   const physicsTrendlineSlope = document.createElement('div');
   physicsTrendlineSlope.classList.add('trendline');
   physicsTrendlineSlope.id = 'trendline-equation-slope-physics';
-  physicsTrendlineSlope.textContent = '8';
+  physicsTrendlineSlope.textContent = '';
 
   const physicsTrendlineSlopeUnits = document.createElement('div');
   physicsTrendlineSlopeUnits.classList.add('trendline');
+  const closingParent = document.createElement('div');
+  closingParent.id = 'closing_paren';
 
+  physicsTrendlineSlope.classList.add('trendline');
   const physicsTrendlineX = document.createElement('div');
   physicsTrendlineX.classList.add('trendline');
   physicsTrendlineX.id = 'trendline-equation-x-physics';
-  physicsTrendlineX.textContent = 'x';
+  physicsTrendlineX.textContent = '';
   physicsVersionCtn.append(
     physicsTrendlineY,
     physicsTrendlineSlope,
     renderUnitsFraction('', '', physicsTrendlineSlopeUnits),
+    closingParent,
     physicsTrendlineX,
   );
 
   left.append(physicsVersionLabel, physicsVersionCtn);
 };
 
+function refreshPage() {
+  window.location.reload();
+}
+
 const makeLeftside = (chart) => {
   const newDatasetButton = document.createElement('button');
   newDatasetButton.type = 'button';
   newDatasetButton.id = 'newDataSet';
   newDatasetButton.textContent = 'New Data Set';
-  // newDatasetButton.onclick = resetFn;
+  newDatasetButton.onclick = refreshPage;
   left.append(newDatasetButton);
   makeHorizontalAxesControls(chart);
   makeSlopeSlider(chart);
   renderTrendlineEquation();
 };
 
-export { makeHeader, makeLeftside };
+const makeRightside = () => {
+  const header = document.createElement('h2');
+  header.textContent = 'Plot a curve:';
+  const plotdiv = document.createElement('div');
+  plotdiv.classList.add('plotdiv');
+  plotdiv.innerHTML = 'Once you have transformed and fit your data, '
+    + 'type in the coefficient and exponent '
+    + 'that best describe the relationship: ';
+  const right = document.querySelector('.right');
+
+  const eqnToPlotDiv = document.createElement('div');
+  eqnToPlotDiv.id = 'eq';
+  const depVar = document.createElement('div');
+  depVar.id = 'dep_var';
+  depVar.textContent = 'y';
+  const equals = document.createElement('span');
+  equals.textContent = ' = (';
+  const coefficient = document.createElement('input');
+  coefficient.id = 'coefficient';
+  coefficient.type = 'text';
+  const closingParen = document.createElement('span');
+  closingParen.textContent = ')';
+  const indepVar = document.createElement('div');
+  indepVar.id = 'indep_var';
+  indepVar.textContent = 'x';
+  const power = document.createElement('input');
+  power.id = 'exp';
+
+  eqnToPlotDiv.append(depVar, equals, coefficient, closingParen, indepVar, power);
+
+  const plotDataButton = document.createElement('button');
+  plotDataButton.type = 'button';
+  plotDataButton.id = 'submit';
+  plotDataButton.textContent = 'Submit';
+
+  const errorDiv = document.createElement('div');
+  errorDiv.id = 'error';
+  /*
+  <button type="button" id="submit" onclick="generateIdeal()">Submit</button>
+  <div id='error'></div>
+*/
+  right.append(header, plotdiv, eqnToPlotDiv, plotDataButton, errorDiv);
+};
+export { makeHeader, makeLeftside, makeRightside };
