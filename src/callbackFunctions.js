@@ -38,13 +38,15 @@ const sliderFunction = (experiment) => {
   document.getElementById('closing_paren').textContent = ')';
 };
 
-const radioButtonCallback = (e, dataObject, experiment) => {
+const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {
   const myChart = Chart.getChart(document.getElementById('myChart'));
   const xLabel = experiment.indepVar;
   const yLabel = experiment.depVar;
   const xSymbol = experiment.indepVarSymbol;
   const xUnits = experiment.indepVarUnits;
   const choiceVal = e.target.value;
+
+  // Change the plotted data, axis labels, title
   if (choiceVal === '1') {
     myChart.data.datasets[0].data = dataObject.rawData;
   } else if (choiceVal === '2') {
@@ -56,9 +58,18 @@ const radioButtonCallback = (e, dataObject, experiment) => {
   }
   myChart.options.scales.x.title.text = `${produceXLabel(xLabel, choiceVal)} `
   + `${produceXLabel(xSymbol, choiceVal)} (${produceXUnits(xUnits, choiceVal)})`;
-
   myChart.options.plugins.title.text = `${produceXLabel(yLabel, 1)} vs. ${produceXLabel(xLabel, choiceVal)}`;
+
+  // Change the plotted trendline
+  if (myChart.data.datasets[1]) {
+    for (let i = 0; i < myChart.data.datasets[1].data.length; i += 1) {
+      myChart.data.datasets[1].data[i].x **= (choiceVal / prevExponent);
+    }
+  }
+
+  // Change the symbols in the trendline equations
   sliderFunction(experiment);
+
   myChart.update();
 };
 
@@ -69,7 +80,6 @@ const plotFunction = () => {
   const choiceVal = document.querySelector("input[type='radio']:checked").value;
   const coeff = document.getElementById('coefficient').value;
   const exp = parseInt(document.getElementById('exp').value, 10);
-  const idealDataObject;
   const idealSet = [];
 
   if (!(exp === -2 || exp === -1 || exp === 1 || exp === 2)) {
@@ -97,15 +107,13 @@ const plotFunction = () => {
     label: 'Ideal Data Set',
     type: 'scatter',
     data: idealSet,
-    showLine: true,
-    fill: false,
+    showLine: false, // true,
+    fill: true, // false,
     borderColor: 'rgba(0, 99, 232, 1)',
     backgroundColor: 'rgba(0, 99, 232, 1)',
-    borderWidth: 1,
-    pointRadius: 0,
+    borderWidth: 2,
+    pointRadius: 2,
   };
-
-
 
   myChart.options.scales.y.max = yMax;
   myChart.update();

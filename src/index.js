@@ -18,6 +18,7 @@ const currentDataObject = makeData(
   currentExperiment.exponent,
   currentExperiment.indepVarRange,
 );
+let prevExponent = 1;
 
 const myChart = makeChart(currentExperiment, currentDataObject, 1);
 makeHeader();
@@ -25,7 +26,10 @@ makeLeftside(myChart);
 
 const axisChoices = document.querySelectorAll('input[type=radio]');
 axisChoices.forEach((choice) => {
-  choice.addEventListener('change', (e) => radioButtonCallback(e, currentDataObject, currentExperiment));
+  choice.addEventListener('change', (e) => {
+    radioButtonCallback(e, currentDataObject, currentExperiment, prevExponent);
+    prevExponent = document.querySelector("input[type='radio']:checked").value;
+  });
 });
 
 document.querySelector('label[for="raw_data_option"]').innerHTML = ` ${produceXLabel(currentExperiment.indepVar, 1)} <br>`;
