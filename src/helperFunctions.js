@@ -47,4 +47,65 @@ const produceXUnits = (str, pow) => {
   return 'unexpected exp';
 };
 
-export { produceXLabel, produceXUnits };
+const addNoise = (
+  dataSet,
+  noiseAmp,
+  power,
+) => {
+  const noisySet = dataSet.map(
+    (point) => {
+      const noisyPoint = {};
+      // get the min values to ensure that no point is made negative
+      const minX = dataSet.reduce((a, b) => {
+        if (a.x < b.x) {
+          return a;
+        } return b;
+      }).x;
+      const minY = dataSet.reduce((a, b) => {
+        if (a.y < b.y) {
+          return a;
+        } return b;
+      }).y;
+      let noiseX;
+      let noiseY;
+      // white noise for linear
+      if (power === 1) {
+        noiseX = noiseAmp * (Math.random() - 0.5);
+        noiseY = noiseAmp * (Math.random() - 0.5);
+
+        // add a litle more noise at the higher end for 2
+      } else if (power === 2) {
+        noiseX = noiseAmp
+         * (Math.random() - 0.5) + noiseAmp * point.x * (Math.random() - 0.5);
+        noiseY = noiseAmp
+        * (Math.random() - 0.5) + noiseAmp * point.y * (Math.random() - 0.5);
+      } else if (power === -1) {
+        noiseX = noiseAmp
+         * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
+        noiseY = noiseAmp
+        * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
+      } else if (power === -2) {
+        noiseX = noiseAmp
+         * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
+        noiseY = noiseAmp
+        * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
+      }
+      // if any coordinate is negative
+      if (point.x + noiseX <= 0) {
+        noiseX = -minX / 2;
+      }
+      if (point.y + noiseY <= 0) {
+        noiseY = -minY / 2;
+      }
+      // 1 - Math.floor(Math.log10(minX));
+
+      noisyPoint.x = (point.x + noiseX).toFixed(3);
+      noisyPoint.y = (point.y + noiseY).toFixed(3);
+      return noisyPoint;
+    },
+  );
+
+  return noisySet;
+};
+
+export { produceXLabel, produceXUnits, addNoise };

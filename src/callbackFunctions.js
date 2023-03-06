@@ -58,7 +58,12 @@ const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {
   }
   myChart.options.scales.x.title.text = `${produceXLabel(xLabel, choiceVal)} `
   + `${produceXLabel(xSymbol, choiceVal)} (${produceXUnits(xUnits, choiceVal)})`;
-  myChart.options.plugins.title.text = `${produceXLabel(yLabel, 1)} vs. ${produceXLabel(xLabel, choiceVal)}`;
+  myChart.options.plugins.title.text = `${experiment.title} ${produceXLabel(yLabel, 1)} vs. ${produceXLabel(xLabel, choiceVal)}`;
+
+  const depVar = document.getElementById('dep_var');
+  depVar.textContent = `${experiment.depVarSymbol} = (`;
+  const indepVar = document.getElementById('indep_var');
+  indepVar.textContent = `) ${xSymbol}`;
 
   // Change the plotted trendline
   if (myChart.data.datasets[1]) {
@@ -107,12 +112,12 @@ const plotFunction = () => {
     label: 'Ideal Data Set',
     type: 'scatter',
     data: idealSet,
-    showLine: false, // true,
-    fill: true, // false,
+    showLine: true,
+    fill: false,
     borderColor: 'rgba(0, 99, 232, 1)',
     backgroundColor: 'rgba(0, 99, 232, 1)',
     borderWidth: 2,
-    pointRadius: 2,
+    pointRadius: 0,
   };
 
   myChart.options.scales.y.max = yMax;

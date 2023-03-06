@@ -11,13 +11,13 @@ const pickExperiment = () => {
       experiment.depVarSymbol = '𝑚';
       experiment.depVarUnits = 'g';
       experiment.indepVarRange = 30;
-      experiment.coefficientRange = 0.5;
+      experiment.coefficientRange = 5;
       experiment.title = 'Shape';
       break;
     case 2:
       experiment.exponent = 2;
       experiment.indepVar = 'Impact Speed';
-      experiment.indepVarSymbol = '𝘷';
+      experiment.indepVarSymbol = '𝑣';
       experiment.indepVarUnits = 'm/s';
       experiment.depVar = 'Depth';
       experiment.depVarSymbol = '𝑑';
@@ -35,7 +35,7 @@ const pickExperiment = () => {
       experiment.depVarSymbol = 'ℎ';
       experiment.depVarUnits = 'cm';
       experiment.indepVarRange = 20;
-      experiment.coefficientRange = 400;
+      experiment.coefficientRange = 200;
       experiment.title = 'Paragraph';
       break;
     case 4:

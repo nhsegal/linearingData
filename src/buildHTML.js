@@ -30,7 +30,7 @@ const makeHorizontalAxesControls = () => {
   rawDataOption.checked = true;
   const rawDataOptionLabel = document.createElement('label');
   rawDataOptionLabel.setAttribute('for', 'raw_data_option');
-  rawDataOptionLabel.innerHTML = 'placeholder <br>';
+  rawDataOptionLabel.innerHTML = '';
   const sqdDataOption = document.createElement('input');
   sqdDataOption.type = 'radio';
   sqdDataOption.name = 'x-axis';
@@ -38,7 +38,7 @@ const makeHorizontalAxesControls = () => {
   sqdDataOption.id = 'sqd_data_option';
   const sqdDataOptionLabel = document.createElement('label');
   sqdDataOptionLabel.setAttribute('for', 'sqd_data_option');
-  sqdDataOptionLabel.innerHTML = 'placeholder <br>';
+  sqdDataOptionLabel.innerHTML = '';
 
   const invDataOption = document.createElement('input');
   invDataOption.type = 'radio';
@@ -47,7 +47,7 @@ const makeHorizontalAxesControls = () => {
   invDataOption.id = 'inv_data_option';
   const invDataOptionLabel = document.createElement('label');
   invDataOptionLabel.setAttribute('for', 'inv_data_option');
-  invDataOptionLabel.innerHTML = 'placeholder <br>';
+  invDataOptionLabel.innerHTML = '';
 
   const invSqdDataOption = document.createElement('input');
   invSqdDataOption.type = 'radio';
@@ -56,7 +56,7 @@ const makeHorizontalAxesControls = () => {
   invSqdDataOption.id = 'invsqd_data_option';
   const invSqdDataOptionLabel = document.createElement('label');
   invSqdDataOptionLabel.setAttribute('for', 'invsqd_data_option');
-  invSqdDataOptionLabel.innerHTML = 'placeholder <br>';
+  invSqdDataOptionLabel.innerHTML = '';
 
   const spacer = document.createElement('div');
   spacer.classList.add('spacer');
@@ -199,21 +199,19 @@ const makeRightside = () => {
   eqnToPlotDiv.id = 'eq';
   const depVar = document.createElement('div');
   depVar.id = 'dep_var';
-  depVar.textContent = 'y';
-  const equals = document.createElement('span');
-  equals.textContent = ' = (';
+  depVar.textContent = '';
+
   const coefficient = document.createElement('input');
   coefficient.id = 'coefficient';
   coefficient.type = 'text';
-  const closingParen = document.createElement('span');
-  closingParen.textContent = ')';
+
   const indepVar = document.createElement('div');
   indepVar.id = 'indep_var';
-  indepVar.textContent = 'x';
+  indepVar.textContent = '';
   const power = document.createElement('input');
   power.id = 'exp';
 
-  eqnToPlotDiv.append(depVar, equals, coefficient, closingParen, indepVar, power);
+  eqnToPlotDiv.append(depVar, coefficient, indepVar, power);
 
   const plotDataButton = document.createElement('button');
   plotDataButton.type = 'button';
@@ -222,10 +220,7 @@ const makeRightside = () => {
 
   const errorDiv = document.createElement('div');
   errorDiv.id = 'error';
-  /*
-  <button type="button" id="submit" onclick="generateIdeal()">Submit</button>
-  <div id='error'></div>
-*/
+
   right.append(header, plotdiv, eqnToPlotDiv, plotDataButton, errorDiv);
 };
 export { makeHeader, makeLeftside, makeRightside };

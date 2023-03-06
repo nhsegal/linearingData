@@ -1,3 +1,5 @@
+import { addNoise } from './helperFunctions';
+
 const makeData = (N, noise, coefficient, exponent, xMax) => {
   const dataObject = {
     rawData: [],
@@ -5,63 +7,55 @@ const makeData = (N, noise, coefficient, exponent, xMax) => {
     invData: [],
     invSqData: [],
   };
-  for (let i = 0; i < N; i += 1) {
-    let xx = (xMax / 10)
-    * ((10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
-    while (xx <= 0) {
-      xx = (xMax / 10)
-      * ((10 * (1 + i)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
-    }
-    if (exponent < 0) {
-      xx = (xMax / 10)
-      * ((10 * (1 + (i * i) / 10)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
-      while (xx <= 0) {
-        xx = (xMax / 10)
-        * ((10 * (1 + (i * i) / 10)) / N + noise * (Math.round(Math.random() * 10) / 10 - 0.5));
-      }
-    }
-    const yy = Math.round(
-      100
-          * (coefficient
-            * (xx
-              + (1 + 0.5 * exponent)
-                * (4 / (i + 4))
-                * (noise / 2)
-                * (Math.round(Math.random() * 10) / 10 - 0.5))
-              ** exponent),
-    ) / 100;
-    /*
-    while (yy <= 0) {
-      yy = Math.round(
-        100
-            * (coefficient
-              * (xx
-                + (1 + 0.5 * exponent)
-                  * (4 / (i + 4))
-                  * (noise / 2)
-                  * (Math.round(Math.random() * 10) / 10 - 0.5))
-                ** exponent),
-      ) / 100;
-    }
-    */
 
-    dataObject.rawData.push({
-      x: Math.round(100 * xx) / 100,
-      y: Math.round(yy * 100) / 100,
-    });
-    dataObject.sqData.push({
-      x: Math.round(100 * xx ** 2) / 100,
-      y: Math.round(yy * 100) / 100,
-    });
-    dataObject.invData.push({
-      x: Math.round(1000 * xx ** -1) / 1000,
-      y: Math.round(yy * 100) / 100,
-    });
-    dataObject.invSqData.push({
-      x: Math.round(1000 * xx ** -2) / 1000,
-      y: Math.round(yy * 100) / 100,
+  const baseSet = [];
+
+  let xx;
+  let yy;
+  // Based on the exponent alter the sampling of x
+  for (let i = 0; i < N; i += 1) {
+    if (exponent === 1) {
+      xx = (i + 1) / N;
+    } else if (exponent === 2) {
+      xx = Math.sqrt((i + 1) / N);
+    } else if (exponent === -1) {
+      xx = ((i + 1) / N) ** -1;
+    } else if (exponent === -2) {
+      xx = ((i + 1) / N) ** -0.5;
+    }
+    yy = xx ** exponent;
+    // baseSet scaled to one in each direction
+    baseSet.push({
+      x: xx,
+      y: yy,
     });
   }
+
+  const baseWithNoiseSet = addNoise(baseSet, noise, exponent);
+  dataObject.rawData = baseWithNoiseSet
+    .map((point) => (
+      {
+        x: Math.round(xMax * point.x * 10) / 10,
+        y: Math.round(coefficient * point.y * 10) / 10,
+      }));
+  dataObject.sqData = baseWithNoiseSet
+    .map((point) => (
+      {
+        x: (Math.round(xMax * point.x * 10) / 10) ** 2,
+        y: Math.round(coefficient * point.y * 10) / 10,
+      }));
+  dataObject.invData = baseWithNoiseSet
+    .map((point) => (
+      {
+        x: (Math.round(xMax * point.x * 10) / 10) ** -1,
+        y: Math.round(coefficient * point.y * 10) / 10,
+      }));
+  dataObject.invSqData = baseWithNoiseSet
+    .map((point) => (
+      {
+        x: (Math.round(xMax * point.x * 10) / 10) ** -2,
+        y: Math.round(coefficient * point.y * 10) / 10,
+      }));
   return dataObject;
 };
 

@@ -102,7 +102,9 @@ const makeChart = (experiment, dataObject, option) => {
       responsive: true,
       maintainAspectRatio: true,
       scales: {
+
         x: {
+          beginAtZero: true,
           type: 'linear',
           title: {
             display: true,
@@ -111,12 +113,10 @@ const makeChart = (experiment, dataObject, option) => {
               size: 16,
             },
           },
-          ticks: {
-            beginAtZero: true,
 
-          },
         },
         y: {
+          beginAtZero: true,
           type: 'linear',
           title: {
             display: true,
@@ -125,12 +125,8 @@ const makeChart = (experiment, dataObject, option) => {
               size: 16,
             },
           },
-          ticks: {
-            beginAtZero: true,
-          },
         },
       },
-
     },
   });
 
