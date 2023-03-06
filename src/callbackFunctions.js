@@ -33,9 +33,11 @@ const sliderFunction = (experiment) => {
   document.getElementById('trendline-equation-y-physics').textContent = `${experiment.depVarSymbol} = `;
   document.getElementById('trendline-equation-slope-physics').textContent = `(${slope}`;
   document.getElementById('trendline-equation-x-physics').innerHTML = `${produceXLabel(experiment.indepVarSymbol, choiceVal, true)}`;
-  document.getElementById('fup').textContent = `${produceXUnits(experiment.depVarUnits, 1, true)}`;
-  document.getElementById('fdn').textContent = `${produceXUnits(experiment.indepVarUnits, choiceVal, true)}`;
+  document.getElementById('fup1').textContent = `${produceXUnits(experiment.depVarUnits, 1, true)}`;
+  document.getElementById('fdn1').textContent = `${produceXUnits(experiment.indepVarUnits, choiceVal, true)}`;
   document.getElementById('closing_paren').textContent = ')';
+  document.getElementById('fup2').textContent = `${produceXUnits(experiment.depVarUnits, 1, true)}`;
+  document.getElementById('fdn2').textContent = `${produceXUnits(experiment.indepVarUnits, choiceVal, true)}`;
 };
 
 const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {

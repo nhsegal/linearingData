@@ -8,15 +8,19 @@ import { produceXLabel } from './helperFunctions';
 
 const N = 12; // Number of data points
 const currentExperiment = pickExperiment(); // Object with exponent, labels, etc
-const coefficient = Math.round(100 * currentExperiment.coefficientRange
-  - (50 * currentExperiment.coefficientRange) * Math.random()) / 100;
-const noise = 0.06;
+const coefficient = currentExperiment.coefficientRange * (0.85 + Math.random() * 0.3);
+
+const noise = 0.05;
+
+// (N, noise, coefficient, exponent, xMax, xPrecision, yPrecision)
 const currentDataObject = makeData(
   N,
   noise,
   coefficient,
   currentExperiment.exponent,
   currentExperiment.indepVarRange,
+  currentExperiment.indepVarPrecision,
+  currentExperiment.depVarPrecision,
 );
 let prevExponent = 1;
 
@@ -48,9 +52,10 @@ document.querySelector('label[for="invsqd_data_option"]').innerHTML = ` ${produc
 document.querySelector('#dep_var').textContent = `${currentExperiment.depVarSymbol} = (`;
 document.querySelector('#indep_var').textContent = `) ${currentExperiment.indepVarSymbol}`;
 
+document.querySelector('#dep_var').textContent = `${currentExperiment.depVarSymbol} = (`;
+document.querySelector('#indep_var').textContent = `) ${currentExperiment.indepVarSymbol}`;
+
 /*
 To do:
-display slope on graph and
-display slope units for submitted equation
-update slope on slope slider after radio buton
+display slope on graph
 */

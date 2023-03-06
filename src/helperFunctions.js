@@ -81,14 +81,14 @@ const addNoise = (
         * (Math.random() - 0.5) + noiseAmp * point.y * (Math.random() - 0.5);
       } else if (power === -1) {
         noiseX = noiseAmp
-         * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
+         * (Math.random() - 0.5) + 1.0 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
         noiseY = noiseAmp
-        * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
+        * (Math.random() - 0.5) + 1.0 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
       } else if (power === -2) {
         noiseX = noiseAmp
-         * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
+         * (Math.random() - 0.5) + 0.7 * noiseAmp * (1 - point.x) * (Math.random() - 0.5);
         noiseY = noiseAmp
-        * (Math.random() - 0.5) + 1.5 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
+        * (Math.random() - 0.5) + 0.7 * noiseAmp * (1 - point.y) * (Math.random() - 0.5);
       }
       // if any coordinate is negative
       if (point.x + noiseX <= 0) {

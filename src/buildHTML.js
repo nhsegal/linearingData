@@ -93,14 +93,14 @@ const makeSlopeSlider = (chart) => {
   left.appendChild(slopeSlider);
 };
 
-const renderUnitsFraction = (top, bot, ctn) => {
+const renderUnitsFraction = (top, bot, ctn, topid, botid) => {
   ctn.classList.add('fraction');
   const fup = document.createElement('span');
-  fup.id = 'fup';
+  fup.id = topid;
   fup.classList.add('fup');
   fup.innerHTML = top;
   const fdn = document.createElement('span');
-  fdn.id = 'fdn';
+  fdn.id = botid;
   fdn.classList.add('fdn');
   fdn.innerHTML = bot;
   ctn.append(fup, fdn);
@@ -161,7 +161,7 @@ const renderTrendlineEquation = () => {
   physicsVersionCtn.append(
     physicsTrendlineY,
     physicsTrendlineSlope,
-    renderUnitsFraction('', '', physicsTrendlineSlopeUnits),
+    renderUnitsFraction('', '', physicsTrendlineSlopeUnits, 'fup1', 'fdn1'),
     closingParent,
     physicsTrendlineX,
   );
@@ -205,13 +205,23 @@ const makeRightside = () => {
   coefficient.id = 'coefficient';
   coefficient.type = 'text';
 
+  const plotEqSlopeUnits = document.createElement('div');
+  plotEqSlopeUnits.classList.add('fraction', 'trendline');
+  plotEqSlopeUnits.id = 'slope_units_eqn_to_plot';
+
   const indepVar = document.createElement('div');
   indepVar.id = 'indep_var';
   indepVar.textContent = '';
   const power = document.createElement('input');
   power.id = 'exp';
 
-  eqnToPlotDiv.append(depVar, coefficient, indepVar, power);
+  eqnToPlotDiv.append(
+    depVar,
+    coefficient,
+    renderUnitsFraction('', '', plotEqSlopeUnits, 'fup2', 'fdn2'),
+    indepVar,
+    power,
+  );
 
   const plotDataButton = document.createElement('button');
   plotDataButton.type = 'button';

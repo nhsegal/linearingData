@@ -1,6 +1,7 @@
 import { addNoise } from './helperFunctions';
 
-const makeData = (N, noise, coefficient, exponent, xMax) => {
+const makeData = (N, noise, coefficient, exponent, xMax, xPrecision, yPrecision) => {
+  console.log(xMax);
   const dataObject = {
     rawData: [],
     sqData: [],
@@ -19,9 +20,9 @@ const makeData = (N, noise, coefficient, exponent, xMax) => {
     } else if (exponent === 2) {
       xx = Math.sqrt((i + 1) / N);
     } else if (exponent === -1) {
-      xx = ((i + 1) / N) ** -1;
+      xx = ((1 / N) ** 0.5) * ((i + 1) / N) ** -0.5;
     } else if (exponent === -2) {
-      xx = ((i + 1) / N) ** -0.5;
+      xx = ((1 / N) ** 0.5) * ((i + 1) / N) ** -0.5;
     }
     yy = xx ** exponent;
     // baseSet scaled to one in each direction
@@ -35,26 +36,26 @@ const makeData = (N, noise, coefficient, exponent, xMax) => {
   dataObject.rawData = baseWithNoiseSet
     .map((point) => (
       {
-        x: Math.round(xMax * point.x * 10) / 10,
-        y: Math.round(coefficient * point.y * 10) / 10,
+        x: Math.round((xMax * point.x) / xPrecision) * xPrecision,
+        y: Math.round((coefficient * point.y) / yPrecision) * yPrecision,
       }));
-  dataObject.sqData = baseWithNoiseSet
+  dataObject.sqData = dataObject.rawData
     .map((point) => (
       {
-        x: (Math.round(xMax * point.x * 10) / 10) ** 2,
-        y: Math.round(coefficient * point.y * 10) / 10,
+        x: point.x ** 2,
+        y: point.y,
       }));
-  dataObject.invData = baseWithNoiseSet
+  dataObject.invData = dataObject.rawData
     .map((point) => (
       {
-        x: (Math.round(xMax * point.x * 10) / 10) ** -1,
-        y: Math.round(coefficient * point.y * 10) / 10,
+        x: point.x ** -1,
+        y: point.y,
       }));
-  dataObject.invSqData = baseWithNoiseSet
+  dataObject.invSqData = dataObject.rawData
     .map((point) => (
       {
-        x: (Math.round(xMax * point.x * 10) / 10) ** -2,
-        y: Math.round(coefficient * point.y * 10) / 10,
+        x: point.x ** -2,
+        y: point.y,
       }));
   return dataObject;
 };
