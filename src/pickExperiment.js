@@ -13,6 +13,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 30;
       experiment.coefficientRange = 5;
       experiment.title = 'Shape';
+      experiment.indepVarPrecision = 0.5;
+      experiment.depVarPrecision = 0.5;
       break;
     case 2:
       experiment.exponent = 2;
@@ -25,6 +27,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 6;
       experiment.coefficientRange = 0.9;
       experiment.title = 'Crater';
+      experiment.indepVarPrecision = 0.1;
+      experiment.depVarPrecision = 1;
       break;
     case 3:
       experiment.exponent = -1;
@@ -37,6 +41,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 20;
       experiment.coefficientRange = 200;
       experiment.title = 'Paragraph';
+      experiment.indepVarPrecision = 0.25;
+      experiment.depVarPrecision = 0.25;
       break;
     case 4:
       experiment.exponent = -1;
@@ -49,6 +55,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 50;
       experiment.coefficientRange = 1;
       experiment.title = 'Projectile';
+      experiment.indepVarPrecision = 1;
+      experiment.depVarPrecision = 1;
       break;
     case 5:
       experiment.exponent = -2;
@@ -61,6 +69,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 4;
       experiment.coefficientRange = 3;
       experiment.title = 'Light';
+      experiment.indepVarPrecision = 0.01;
+      experiment.depVarPrecision = 0.01;
       break;
     case 6:
       experiment.exponent = -2;
@@ -73,6 +83,8 @@ const pickExperiment = () => {
       experiment.indepVarRange = 30;
       experiment.coefficientRange = 3;
       experiment.title = 'Parachute';
+      experiment.indepVarPrecision = 1;
+      experiment.depVarPrecision = 2;
       break;
 
     default:
