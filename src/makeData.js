@@ -1,7 +1,6 @@
 import { addNoise } from './helperFunctions';
 
 const makeData = (N, noise, coefficient, exponent, xMax, xPrecision, yPrecision) => {
-  console.log(xMax);
   const dataObject = {
     rawData: [],
     sqData: [],

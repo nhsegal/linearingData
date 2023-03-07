@@ -1,7 +1,16 @@
+import modalContent from './modalContent';
+
 const left = document.querySelector('.left');
-const body = document.querySelector('body');
+
+const makeModal = () => {
+  const modalContentDiv = document.createElement('div');
+  modalContentDiv.innerHTML = modalContent;
+  const modal = document.getElementById('modal');
+  modal.append(modalContent);
+};
 
 const makeHeader = () => {
+  makeModal();
   const mainHeading = document.createElement('h1');
   mainHeading.textContent = 'Fit the Data';
   const modalButton = document.createElement('button');
@@ -14,7 +23,7 @@ const makeHeader = () => {
   closeModalX.onclick = () => {
     modal.classList.remove('visible');
   };
-
+  const body = document.querySelector('body');
   body.prepend(mainHeading);
   body.prepend(modalButton);
 };
@@ -233,4 +242,36 @@ const makeRightside = () => {
 
   right.append(header, plotdiv, eqnToPlotDiv, plotDataButton, errorDiv);
 };
-export { makeHeader, makeLeftside, makeRightside };
+
+const makeCenter = () => {
+  const center = document.querySelector('.center');
+  const plottedTrendlineContainer = document.createElement('div');
+  plottedTrendlineContainer.classList.add('plotted-trendline-container');
+  const plottedTrendlineY = document.createElement('div');
+  plottedTrendlineY.classList.add('trendline');
+  plottedTrendlineY.id = 'plotted-trendline-y';
+
+  const plottedTrendlineSlope = document.createElement('div');
+  plottedTrendlineSlope.classList.add('trendline');
+  plottedTrendlineSlope.id = 'plotted-trendline-slope';
+
+  const plottedTrendlineSlopeUnits = document.createElement('div');
+  plottedTrendlineSlopeUnits.classList.add('trendline');
+
+  const plottedTrendlineX = document.createElement('div');
+  plottedTrendlineX.classList.add('trendline');
+  plottedTrendlineX.id = 'plotted-trendline-x';
+
+  plottedTrendlineContainer.append(
+    plottedTrendlineY,
+    plottedTrendlineSlope,
+    renderUnitsFraction('', '', plottedTrendlineSlopeUnits, 'fup3', 'fdn3'),
+    plottedTrendlineX,
+  );
+
+  center.append(plottedTrendlineContainer);
+};
+
+export {
+  makeHeader, makeLeftside, makeRightside, makeCenter,
+};

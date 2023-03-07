@@ -45,6 +45,7 @@ const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {
   const xLabel = experiment.indepVar;
   const yLabel = experiment.depVar;
   const xSymbol = experiment.indepVarSymbol;
+  const ySymbol = experiment.depVarSymbol;
   const xUnits = experiment.indepVarUnits;
   const choiceVal = e.target.value;
 
@@ -63,7 +64,7 @@ const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {
   myChart.options.plugins.title.text = `${experiment.title} ${produceXLabel(yLabel, 1)} vs. ${produceXLabel(xLabel, choiceVal)}`;
 
   const depVar = document.getElementById('dep_var');
-  depVar.textContent = `${experiment.depVarSymbol} = (`;
+  depVar.textContent = `${ySymbol} = (`;
   const indepVar = document.getElementById('indep_var');
   indepVar.textContent = `) ${xSymbol}`;
 
@@ -80,7 +81,7 @@ const radioButtonCallback = (e, dataObject, experiment, prevExponent) => {
   myChart.update();
 };
 
-const plotFunction = () => {
+const plotFunction = (experiment) => {
   const myChart = Chart.getChart(document.getElementById('myChart'));
   const xMax = myChart.scales.x.end;
   const yMax = myChart.scales.y.end;
@@ -88,6 +89,12 @@ const plotFunction = () => {
   const coeff = document.getElementById('coefficient').value;
   const exp = parseInt(document.getElementById('exp').value, 10);
   const idealSet = [];
+  document.getElementById('error').innerHTML = '';
+
+  if (Number.isNaN(parseFloat(+exp)) || Number.isNaN(parseFloat(+coeff))) {
+    document.getElementById('error').innerHTML = 'In the fields above please enter numeric values for both the coefficient and exponent.';
+    return;
+  }
 
   if (!(exp === -2 || exp === -1 || exp === 1 || exp === 2)) {
     document.getElementById('error').innerHTML = 'To fit the data, try picking the exponent from the set [-2, -1, 1, 2].';
@@ -124,23 +131,23 @@ const plotFunction = () => {
 
   myChart.options.scales.y.max = yMax;
   myChart.update();
-/*
+
   const fup3 = document.querySelector('#fup3');
   const fdn3 = document.querySelector('#fdn3');
-  const yvar = document.querySelector('#trendline-equation-y-3');
-  const xvar = document.querySelector('#trendline-equation-x-3');
-  const slope3 = document.querySelector('#trendline-equation-slope-3');
-  yvar.textContent = `${ySymbol} = (`;
-  slope3.textContent = `${coeff}`;
+  const yvar = document.querySelector('#plotted-trendline-y');
+  const xvar = document.querySelector('#plotted-trendline-x');
+  const slope3 = document.querySelector('#plotted-trendline-slope');
+  console.log(fup3);
+  yvar.textContent = `${experiment.depVarSymbol} = (`;
+  slope3.textContent = coeff;
   if (exp !== 1) {
-    xvar.innerHTML = `) ${xSymbol}<sup style= 'font-size: 0.75rem;'>${exp}</sup>`;
-    fdn3.innerHTML = `${xUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`;
+    xvar.innerHTML = `) ${experiment.indepVarSymbol}<sup style= 'font-size: 0.75rem;'>${exp}</sup>`;
+    fdn3.innerHTML = `${experiment.indepVarUnits}<sup style= 'font-size: 0.5rem;'>${exp}</sup>`;
   } else {
-    xvar.innerHTML = `) ${xSymbol}`;
-    fdn3.innerHTML = `${xUnits}`;
+    xvar.innerHTML = `) ${experiment.indepVarSymbol}`;
+    fdn3.innerHTML = `${experiment.indepVarUnits}`;
   }
-  fup3.textContent = `${yUnits}`;
-  */
+  fup3.textContent = `${experiment.depVarUnits}`;
 };
 
 export { sliderFunction, radioButtonCallback, plotFunction };
