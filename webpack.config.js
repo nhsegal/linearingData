@@ -3,7 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  mode: 'development', //production
+  mode: 'production', //production'development'
   entry: {
     main: path.resolve(__dirname, 'src/index.js')
   },
