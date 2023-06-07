@@ -30,7 +30,7 @@ const makeHeader = () => {
 
 const makeHorizontalAxesControls = () => {
   const header = document.createElement('h2');
-  header.textContent = 'Select the horizontal axes:';
+  header.textContent = 'Select the horizontal axis:';
   const rawDataOption = document.createElement('input');
   rawDataOption.type = 'radio';
   rawDataOption.name = 'x-axis';
