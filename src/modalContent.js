@@ -33,7 +33,7 @@ understanding of proportionality, variation, and the meaning of power laws. Arti
 is a worthwhile exercise.
 
 <h2>Do the different datasets refer to specifc experiments?</h2>
-The data is randomally generated, but the choice of variables relates to specific experiments that I expect to have particular 
+The data is randomly generated, but the choice of variables relates to specific experiments that I expect to have particular 
 power law relationships. I made an effort to make the values somewhat realistic but prioritized making the range wide enough to
  distinguish between different power fits.
 
